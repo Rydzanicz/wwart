@@ -1,0 +1,15 @@
+.cookie-banner button {
+  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  border: none;
+  border-radius: 18px;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-weight: 700;
+  color: #000000;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.cookie-banner button:hover {
+  background: linear-gradient(90deg, #b89de0 0%, #89bbf0 100%);
+  transform: translateY(-3px);
+}

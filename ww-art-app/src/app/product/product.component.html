@@ -1,0 +1,53 @@
+<div class="product-card" (click)="onProductClick()">
+  <div class="product-image-container">
+    <img
+      [src]="product.image && product.image.length > 0 ? product.image[0] : 'assets/placeholder-product.jpg'"
+      [alt]="product.name"
+      class="product-image"
+      (error)="onImageError($event)">
+
+    <div class="product-badge" *ngIf="product.badge">
+      {{ product.badge }}
+    </div>
+    <div class="image-caption">
+      Zdjęcie poglądowe
+    </div>
+  </div>
+
+  <div class="product-content">
+    <div class="product-category" *ngIf="product.category">
+      {{ product.category }}
+    </div>
+
+    <h2 class="product-name">{{ product.name }}</h2>
+
+    <p class="product-description" *ngIf="product.description">
+      {{ product.description }}
+    </p>
+
+    <div class="product-rating" *ngIf="product.rating">
+      <div class="rating-stars">
+        <span class="material-icons"
+              *ngFor="let star of getRatingStars(product.rating)"
+              [class.filled]="star.filled">
+          {{ star.filled ? 'star' : 'star_border' }}
+        </span>
+      </div>
+      <span class="rating-count" *ngIf="product.ratingCount">
+        ({{ product.ratingCount }} opinii)
+      </span>
+    </div>
+
+    <div class="product-price">
+      <span class="price-amount">{{ product.price }}</span>
+      <span class="product-price-currency">PLN</span>
+      <span class="price-original" *ngIf="product.originalPrice">
+        {{ product.originalPrice }} PLN
+      </span>
+    </div>
+
+    <button class="btn-wishlist" (click)="onToggleWishlist($event)">
+      <span class="material-icons">{{ product.isInWishlist ? 'favorite' : 'favorite_border' }}</span>
+    </button>
+  </div>
+</div>

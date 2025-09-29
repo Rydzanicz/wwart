@@ -1,0 +1,77 @@
+<div class="shop-container">
+  <section class="left-promo-section fade-in-up">
+    <div class="left-promo-text">
+      <h2>Dlaczego warto wybrać nasze luksusowe akcesoria?</h2>
+      <p>
+        Nasze adreesówki z diamentami i szlachetnymi kamieniami to połączenie najwyższej jakości materiałów
+        i ręcznego wykonania, które gwarantuje unikalność i prestiż dla Twojego pupila. Niech Twój zwierzak
+        zabłyśnie wyjątkowym stylem z dodatkiem luksusu i klasy.
+      </p>
+      <p>
+        Dołącz do grona zadowolonych klientów ceniących nie tylko piękno, ale i komfort oraz bezpieczeństwo.
+        Spraw swojemu przyjacielowi prawdziwy prezent, który podkreśli jego wyjątkowość!
+      </p>
+    </div>
+    <div class="left-promo-image-container">
+      <img src="assets/bulldog.jpg" alt="bulldog w luksusowej obroży" class="left-promo-image"/>
+    </div>
+  </section>
+
+  <section class="right-promo-section fade-in-up">
+    <div class="right-promo-image-container">
+      <img src="assets/kot.jpg" alt="Kot z luksusową adresówką" class="right-promo-image"/>
+    </div>
+    <div class="right-promo-text">
+      <h2>Wyjątkowe grawerowanie personalizowane</h2>
+      <p>
+        Każda z naszych luksusowych adresówek jest nie tylko ozdobiona szlachetnymi kamieniami, ale
+        również oferuje możliwość personalizacji poprzez grawerowanie.
+      </p>
+      <p>
+        Na jednej stronie wykonujemy precyzyjne grawerowanie imienia Twojego pupila, natomiast na drugiej
+        stronie umieszczamy dane właściciela. Dzięki temu Twoje zwierzę zawsze wróci bezpiecznie do domu.
+      </p>
+      <p>
+        Grawer wykonany jest z najwyższą dbałością i trwałością, odporny na codzienne użytkowanie oraz
+        zachowujący czytelność i piękny wygląd przez wiele lat.
+      </p>
+    </div>
+  </section>
+
+  <section class="left-promo-section fade-in-up">
+    <div class="left-promo-text">
+      <h2>Wyjątkowa Elegancja dla Twojego Pupila</h2>
+      <p>
+        Oferujemy luksusowe, ręcznie wykonane zdobione adresówki diamentowe.
+        Dostępne w trzech rozmiarach, idealnie dopasowanych do najmniejszych yorków, drobnych ras oraz większych psów.
+        Każda adresówka łączy w sobie wyjątkowy styl, trwałość oraz pełen komfort noszenia, zapewniając bezpieczeństwo i
+        elegancję Twojego pupila w każdym spacerze.
+      </p>
+      <p>
+        Diamentowa adresówka nie tylko dodaje niepowtarzalnego blasku, ale również gwarantuje
+        bezpieczeństwo oraz personalizację dzięki grawerowi z imieniem pupila oraz danymi właściciela
+        umieszczonymi na dwóch stronach.
+      </p>
+    </div>
+    <div class="left-promo-image-container">
+      <img src="assets/york.jpg" alt="Yorkshire Terrier w luksusowej obroży" class="left-promo-image"/>
+    </div>
+  </section>
+
+
+  <div class="shop-content">
+    <div class="shop-header">
+      <h2 class="shop-title fade-in-up">Luksusowe Akcesoria</h2>
+      <p class="shop-subtitle fade-in-up">Odkryj ekskluzywną kolekcję obroży z diamentami i szlachetnymi kamieniami</p>
+    </div>
+
+    <div class="products-grid">
+      <app-product
+        *ngFor="let product of filteredProducts; trackBy: trackByProductId"
+        [product]="product"
+        (productClick)="onProductClick($event)"
+        (wishlistChanged)="onWishlistChanged()">
+      </app-product>
+    </div>
+  </div>
+</div>

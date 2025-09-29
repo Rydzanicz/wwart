@@ -1,0 +1,52 @@
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>WWart</h3>
+      <p>Tworzymy najpiękniejszą biżuterię dla zwierząt w Polsce. Każdy produkt jest ręcznie wykonywany przez
+        doświadczonych jubilerów z najszlachetniejszych materiałów.</p>
+    </div>
+
+    <div class="footer-section">
+      <h3>Obsługa klienta</h3>
+      <div class="footer-links">
+        <a routerLink="/contact">Kontakt</a>
+        <a routerLink="/shipping">Dostawa</a>
+        <a routerLink="/privacy">Polityka prywatności</a>
+        <a routerLink="/terms">Regulamin</a>
+      </div>
+    </div>
+
+  </div>
+  <div class="footer-section">
+    <div class="socially-fomo-bar" aria-live="polite" aria-atomic="true" aria-relevant="additions">
+      <div class="marquee" #marquee>
+        <ng-container *ngFor="let list of [recentPurchases, recentPurchases]">
+          <div *ngFor="let purchase of recentPurchases" class="purchase-alert">
+            <strong>{{ purchase.customerInitials }}</strong> z <strong>{{ purchase.city }}</strong>
+            właśnie kupił <em>{{ purchase.productName }}</em> 🛍️ <strong>{{ purchase.timeAgo }}</strong>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-bottom-content">
+      <p>&copy; {{ currentYear }} WWart. Wszelkie prawa zastrzeżone.</p>
+      <div class="footer-badges">
+        <div class="badge">
+          <span class="material-icons">verified</span>
+          <span>Certyfikat GIA</span>
+        </div>
+        <div class="badge">
+          <span class="material-icons">security</span>
+          <span>Bezpieczne płatności</span>
+        </div>
+        <div class="badge">
+          <span class="material-icons">privacy_tip</span>
+          <span>RODO Compliance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

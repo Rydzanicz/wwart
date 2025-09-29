@@ -1,0 +1,111 @@
+<div class="product-preview-container">
+
+  <div class="shape-selection">
+    <h3>Wybierz kształt adresówki</h3>
+    <div class="shape-selector">
+      <button
+        *ngFor="let shape of availableShapes"
+        [class.active]="selectedShape === shape.id"
+        (click)="setSelectedShape(shape.id)"
+        class="shape-btn">
+        <img [src]="shape.image" [alt]="shape.name" class="shape-preview"/>
+        <span class="shape-name">{{ shape.name }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="tag-preview-section">
+    <h3>Podgląd adresówki - {{ currentShapeName }}</h3>
+
+    <div class="side-toggle">
+      <button
+        [class.active]="showFront"
+        (click)="showFront = true"
+        class="toggle-btn">
+        Przód
+      </button>
+      <button
+        [class.active]="!showFront"
+        (click)="showFront = false"
+        class="toggle-btn">
+        Tył
+      </button>
+    </div>
+
+    <div class="tag-container-real" [class]="'shape-' + selectedShape">
+      <div class="tag-3d-real" [class.flipped]="!showFront">
+
+        <div class="tag-side-real tag-front-real">
+          <img [src]="currentTagImage" [alt]="currentShapeName" class="tag-image"/>
+          <div class="image-caption">Zdjęcie poglądowe</div>
+          <div class="text-overlay front-overlay">
+            <div class="engraved-text front-text">
+              {{ displayFrontText || 'Imię pupila' }}
+            </div>
+          </div>
+        </div>
+
+        <div class="tag-side-real tag-back-real">
+          <img [src]="currentTagImage" [alt]="currentShapeName" class="tag-image"/>
+          <div class="image-caption">Zdjęcie poglądowe</div>
+          <div class="text-overlay back-overlay">
+            <div class="engraved-text back-text">
+              <div class="text-line" *ngFor="let line of displayBackText.split('\n'); let i = index">
+                {{ line || (i === 0 ? 'Numer telefonu' : '') }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="current-side-info">
+      <span class="side-indicator">
+        {{ showFront ? 'Strona przednia' : 'Strona tylna' }}
+      </span>
+    </div>
+  </div>
+
+  <div class="personalization-panel">
+    <h3>Personalizacja</h3>
+
+    <div class="input-group">
+      <label for="frontText">
+        Tekst na przodzie (max {{ maxFrontChars }} znaków):
+      </label>
+      <input
+        id="frontText"
+        type="text"
+        [(ngModel)]="frontText"
+        [maxlength]="maxFrontChars"
+        [class.invalid]="!isFrontTextValid"
+        class="text-input"
+        placeholder="Imię pupila">
+      <div class="char-counter" [class.over-limit]="!isFrontTextValid">
+        {{ frontText.length }} / {{ maxFrontChars }}
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label for="backText">
+        Tekst na tyle (max {{ maxBackChars }} znaków):
+      </label>
+      <textarea
+        id="backText"
+        [(ngModel)]="backText"
+        [maxlength]="maxBackChars"
+        [class.invalid]="!isBackTextValid"
+        class="text-input"
+        rows="3"
+        placeholder="Numer telefonu&#10;Adres e-mail"></textarea>
+      <div class="char-counter" [class.over-limit]="!isBackTextValid">
+        {{ backText.length }} / {{ maxBackChars }}
+      </div>
+    </div>
+
+    <div class="live-preview-info">
+      <div class="info-icon">ℹ️</div>
+      <span>Tekst aktualizuje się w czasie rzeczywistym</span>
+    </div>
+  </div>
+</div>

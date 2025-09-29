@@ -1,0 +1,12 @@
+.privacy-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+}
+
+.privacy-header {
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+  padding: var(--spacing-2xl);
+  text-align: center;
+  color: var(--color-secondary);
+}

@@ -1,0 +1,257 @@
+<div class="summary-container">
+
+  <div class="summary-header">
+    <div class="breadcrumb">
+      <a routerLink="/shop">Sklep</a> /
+      <a routerLink="/cart">Koszyk</a> /
+      <span>Podsumowanie</span>
+    </div>
+    <h1 class="summary-title">
+      <span class="summary-icon">📋</span>
+      Podsumowanie zamówienia
+    </h1>
+  </div>
+
+  <div class="summary-content">
+
+    <div class="order-summary">
+
+      <div class="order-items">
+        <h3 class="section-title">Zamawiane produkty ({{ cartItemCount }})</h3>
+
+        <div *ngFor="let item of cartItems" class="order-item">
+          <div class="item-image">
+            <img [src]="item.image" [alt]="item.name" class="product-img"/>
+          </div>
+
+          <div class="item-details">
+            <h4 class="item-name">{{ item.name }}</h4>
+
+            <div class="item-options" *ngIf="item.size || item.color || item.tagShape">
+              <span class="option" *ngIf="item.size">{{ item.size }}</span>
+              <span class="option" *ngIf="item.color">{{ item.color }}</span>
+              <span class="option" *ngIf="item.tagShape">{{ item.tagShape }}</span>
+            </div>
+
+            <div class="personalization" *ngIf="item.frontText || item.backText">
+              <div class="pers-title">✨ Grawerowanie:</div>
+              <div class="pers-item" *ngIf="item.frontText">
+                Przód: <strong>"{{ item.frontText }}"</strong>
+              </div>
+              <div class="pers-item" *ngIf="item.backText">
+                Tył: <strong>"{{ item.backText }}"</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="item-pricing">
+            <div class="item-quantity">{{ item.quantity }}x</div>
+            <div class="item-price">{{ formatCurrency(item.price) }}</div>
+            <div class="item-total">{{ formatCurrency(getItemTotal(item)) }}</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="financial-summary">
+        <h3 class="section-title">Podsumowanie kosztów</h3>
+
+        <div class="summary-line">
+          <span>Wartość produktów:</span>
+          <span>{{ formatCurrency(subtotal) }}</span>
+        </div>
+
+        <div class="summary-line" *ngIf="shipping > 0">
+          <span>Dostawa:</span>
+          <span>{{ formatCurrency(shipping) }}</span>
+        </div>
+
+        <div class="summary-line free-shipping" *ngIf="shipping === 0">
+          <span>Dostawa:</span>
+          <span class="free">GRATIS</span>
+        </div>
+
+        <div class="summary-line" *ngIf="discount > 0">
+          <span>Rabat:</span>
+          <span class="discount">-{{ formatCurrency(discount) }}</span>
+        </div>
+
+        <div class="summary-line total">
+          <span>Razem do zapłaty:</span>
+          <span>{{ formatCurrency(total) }}</span>
+        </div>
+      </div>
+
+      <div class="order-notes" *ngIf="note">
+        <h3 class="section-title">Uwagi do zamówienia</h3>
+        <div class="note-content">{{ note }}</div>
+      </div>
+
+    </div>
+
+    <div class="buyer-form">
+      <h3 class="section-title">Dane do wysyłki</h3>
+
+      <form (ngSubmit)="saveBuyerInfo()" #buyerForm="ngForm">
+
+        <div class="form-group">
+          <label>Wybierz metodę dostawy *</label>
+          <div class="delivery-options">
+            <label class="delivery-option">
+              <input type="radio" name="deliveryMethod" [(ngModel)]="deliveryMethod"
+                     value="inpost-locker" (change)="onDeliveryMethodChange()" required/>
+              <span class="option-text">📦 Paczkomat InPost</span>
+            </label>
+            <label class="delivery-option">
+              <input type="radio" name="deliveryMethod" [(ngModel)]="deliveryMethod"
+                     value="home-delivery" (change)="onDeliveryMethodChange()" required/>
+              <span class="option-text">🏠 Dostawa do domu</span>
+            </label>
+          </div>
+        </div>
+        <div *ngIf="deliveryMethod === 'inpost-locker'">
+          <app-inpost-geowidget (pointSelected)="handleLockerSelected($event)"></app-inpost-geowidget>
+        </div>
+
+        <div class="form-group" *ngIf="deliveryMethod === 'home-delivery'">
+          <label for="buyerAddress">Adres dostawy *</label>
+          <textarea
+            id="buyerAddress"
+            [(ngModel)]="buyerAddress"
+            name="buyerAddress"
+            required
+            class="form-input"
+            rows="3"
+            placeholder="ul. Przykładowa 123&#10;00-001 Warszawa"></textarea>
+          <div class="form-error" *ngIf="buyerForm.submitted && !buyerAddress && deliveryMethod === 'home-delivery'">
+            To pole jest wymagane
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <label for="buyerName">Imię i nazwisko *</label>
+          <input
+            id="buyerName"
+            type="text"
+            [(ngModel)]="buyerName"
+            name="buyerName"
+            required
+            class="form-input"
+            placeholder="Jan Kowalski"/>
+          <div class="form-error" *ngIf="buyerForm.submitted && !buyerName">
+            To pole jest wymagane
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="buyerEmail">Adres email *</label>
+          <input
+            id="buyerEmail"
+            type="email"
+            [(ngModel)]="buyerAddressEmail"
+            name="buyerAddressEmail"
+            required
+            (blur)="checkEmailValidation(buyerAddressEmail)"
+            class="form-input"
+            [class.error]="emailError"
+            placeholder="jan@example.com"/>
+          <div class="form-error" *ngIf="emailError">
+            Podaj prawidłowy adres email
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="buyerPhone">Numer telefonu *</label>
+          <input
+            id="buyerPhone"
+            type="tel"
+            [(ngModel)]="buyerPhone"
+            name="buyerPhone"
+            required
+            pattern="[0-9]{9}"
+            class="form-input"
+            placeholder="123456789"/>
+          <div class="form-error" *ngIf="buyerForm.submitted && !buyerPhone">
+            Podaj numer telefonu (9 cyfr)
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="buyerNip">NIP (opcjonalnie)</label>
+          <input
+            id="buyerNip"
+            type="text"
+            [(ngModel)]="buyerNip"
+            name="buyerNip"
+            pattern="[0-9]{10}"
+            class="form-input"
+            placeholder="1234567890"/>
+          <div class="form-help">Podaj jeśli potrzebujesz faktury VAT</div>
+        </div>
+
+        <div class="form-group terms-group">
+          <div class="checkbox-wrapper">
+            <input
+              id="acceptTerms"
+              type="checkbox"
+              [(ngModel)]="acceptTerms"
+              name="acceptTerms"
+              required
+              class="terms-checkbox"/>
+            <label for="acceptTerms" class="terms-label">
+              <span class="checkbox-custom"></span>
+              <span class="terms-text">
+                Akceptuję
+                <a routerLink="/terms" target="_blank" class="terms-link">
+                  regulamin sklepu
+                </a>
+                oraz
+                <a routerLink="/privacy" target="_blank" class="terms-link">
+                  politykę prywatności
+                </a> *
+              </span>
+            </label>
+          </div>
+          <div class="form-error" *ngIf="!acceptTerms && buyerForm?.submitted">
+            Musisz zaakceptować regulamin, aby złożyć zamówienie
+          </div>
+        </div>
+
+        <div class="form-group terms-group">
+          <div class="checkbox-wrapper">
+            <input
+              id="testModeAccepted"
+              type="checkbox"
+              [(ngModel)]="testModeAccepted"
+              name="testModeAccepted"
+              required
+              class="terms-checkbox"/>
+            <label for="testModeAccepted" class="terms-label">
+              <span class="checkbox-custom"></span>
+              <span class="terms-text">
+                Akceptuję udział w etapie testów i mam świadomość braku finalizacji transakcji oraz faktu, że towar nie dotrze
+              </span>
+            </label>
+          </div>
+          <div class="form-error" *ngIf="!acceptTerms && buyerForm?.submitted">
+            Musisz zaakceptować regulamin, aby złożyć zamówienie
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" (click)="goBackToCart()" class="btn-back">
+            ← Wróć do koszyka
+          </button>
+
+          <button
+            type="submit"
+            class="btn-submit"
+            [disabled]="!canSubmitOrder">
+            <span class="submit-icon">🛍️</span>
+            Złóż zamówienie
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

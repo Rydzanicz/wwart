@@ -1,0 +1,40 @@
+<div *ngIf="isBrowser" class="inpost-widget-container">
+
+  <!-- Wybrany paczkomat -->
+  <div *ngIf="selectedPoint && !showMap" class="selected-locker">
+    <h4>Wybrany paczkomat:</h4>
+    <div class="locker-info">
+      <strong>{{ selectedPoint.name }}</strong><br/>
+      {{ selectedPoint.address.line1 }}<br/>
+      <span *ngIf="selectedPoint.address.line2">{{ selectedPoint.address.line2 }}</span>
+    </div>
+    <button type="button" class="btn-change-locker" (click)="changeLocker()">
+      Zmień paczkomat
+    </button>
+  </div>
+
+  <!-- Przycisk wyboru paczkomatu -->
+  <div *ngIf="!selectedPoint && !showMap" class="choose-locker">
+    <button type="button" class="btn-submit" (click)="openMap()">
+      📍 Wybierz paczkomat InPost
+    </button>
+  </div>
+
+  <!-- Mapa z widgetem -->
+  <div *ngIf="showMap" class="inpost-map-container">
+    <div class="map-header">
+      <h4>Wybierz paczkomat InPost</h4>
+      <button type="button" class="btn-close-map" (click)="closeMap()">✕</button>
+    </div>
+
+    <inpost-geowidget
+      id="geowidget"
+      #geowidget
+      [attr.token]="token"
+      onpoint="onpointselect"
+      language="pl"
+      config="parcelcollect"
+      style="height: 400px; width: 100%; display: block;">
+    </inpost-geowidget>
+  </div>
+</div>
