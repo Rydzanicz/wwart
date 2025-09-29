@@ -1,9 +1,27 @@
 <footer>
   <div class="footer-content">
     <div class="footer-section">
+      <h3>Kontakt</h3>
+      <div class="contact-links">
+        <p><strong>Siedziba:</strong> Matki Bożej Fatimskiej 63/43, 33-100 Tarnów</p>
+        <p><strong>Zadzwoń do nas:</strong> <a href="tel:+48573847579">+48 573 847 579</a></p>
+        <p><strong>E-mail:</strong> <a href="mailto:kontakt.weronikawoloszyn@gmail.com">kontakt.weronikawoloszyn&#64;gmail.com</a></p>
+        <p class="social-icons">
+          <a href="https://www.instagram.com/weronika.artresin" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-link instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://www.tiktok.com/@weronika.artresin" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="social-link tiktok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-section">
       <h3>WWart</h3>
-      <p>Tworzymy najpiękniejszą biżuterię dla zwierząt w Polsce. Każdy produkt jest ręcznie wykonywany przez
-        doświadczonych jubilerów z najszlachetniejszych materiałów.</p>
+      <p>Moim celem jest 𝗽𝗼𝗺𝗼𝗰 𝘄 𝘀𝘁𝘄𝗼𝗿𝘇𝗲𝗻𝗶𝘂 𝗽𝗿𝘇𝗲𝘀𝘁𝗿𝘇𝗲𝗻𝗶, które odzwierciedlają Twój charakter, emocje i wartości.
+        Projektuję dekoracje, które są nie tylko 𝗲𝘀𝘁𝗲𝘁𝘆𝗰𝘇𝗻𝗲, ale również 𝗻𝗶𝗲𝗽𝗼𝘄𝘁𝗮𝗿𝘇𝗮𝗹𝗻𝗲– każda z nich jest wykonywana z
+        dbałością o szczegóły i dostosowana do Twoich potrzeb</p>
     </div>
 
     <div class="footer-section">
@@ -17,16 +35,14 @@
     </div>
 
   </div>
-  <div class="footer-section">
-    <div class="socially-fomo-bar" aria-live="polite" aria-atomic="true" aria-relevant="additions">
-      <div class="marquee" #marquee>
-        <ng-container *ngFor="let list of [recentPurchases, recentPurchases]">
-          <div *ngFor="let purchase of recentPurchases" class="purchase-alert">
-            <strong>{{ purchase.customerInitials }}</strong> z <strong>{{ purchase.city }}</strong>
-            właśnie kupił <em>{{ purchase.productName }}</em> 🛍️ <strong>{{ purchase.timeAgo }}</strong>
-          </div>
-        </ng-container>
-      </div>
+  <div class="footer-section socially-fomo-bar" aria-live="polite" aria-atomic="true" aria-relevant="additions">
+    <div class="marquee" #marquee>
+      <ng-container *ngFor="let list of [recentPurchases, recentPurchases]">
+        <div *ngFor="let purchase of recentPurchases" class="purchase-alert">
+          <strong>{{ purchase.customerInitials }}</strong> z <strong>{{ purchase.city }}</strong>
+          właśnie kupił <em>{{ purchase.productName }}</em> 🛍️ <strong>{{ purchase.timeAgo }}</strong>
+        </div>
+      </ng-container>
     </div>
   </div>
 
@@ -34,10 +50,6 @@
     <div class="footer-bottom-content">
       <p>&copy; {{ currentYear }} WWart. Wszelkie prawa zastrzeżone.</p>
       <div class="footer-badges">
-        <div class="badge">
-          <span class="material-icons">verified</span>
-          <span>Certyfikat GIA</span>
-        </div>
         <div class="badge">
           <span class="material-icons">security</span>
           <span>Bezpieczne płatności</span>

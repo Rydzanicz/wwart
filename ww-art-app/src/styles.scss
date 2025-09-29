@@ -1,10 +1,9 @@
 
 :root {
-  --color-primary: #d4af37;
-  --color-primary-dark: #b8941f;
-  --color-primary-light: #f4e8b8;
-  --color-secondary: #2c1810;
-  --color-accent: #8b4513;
+  --color-primary: #856D55;
+  --color-primary-dark: #24160E;
+  --color-primary-light: #B2A28E;
+  --color-secondary: #5A3E28;
 
   --color-white: #ffffff;
   --color-black: #1a1a1a;
@@ -695,15 +694,15 @@ footer {
 }
 
 .footer-content {
-  max-width: 1200px;
+  max-width: 1000px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: var(--spacing-xl);
 }
 
 .footer-section h3 {
-  color: var(--color-primary);
+  color: rgba(255, 255, 255, 0.8);
   margin-bottom: var(--spacing-md);
   font-size: 1.25rem;
 }
@@ -733,10 +732,6 @@ footer {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   color: rgba(255, 255, 255, 0.6);
 }
-
-/* ===============================================
-   FORM ELEMENTS
-   =============================================== */
 
 .form-group {
   margin-bottom: var(--spacing-lg);
@@ -785,9 +780,7 @@ footer {
   content: "⚠️";
 }
 
-/* ===============================================
-   RESPONSIVE DESIGN
-   =============================================== */
+
 
 @media (max-width: 768px) {
   header {
@@ -857,10 +850,6 @@ footer {
     font-size: 1.5rem;
   }
 }
-
-/* ===============================================
-   ANIMATIONS & EFFECTS
-   =============================================== */
 
 @keyframes fadeInUp {
   from {
