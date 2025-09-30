@@ -1,49 +1,73 @@
-<div class="container">
-  <div class="content">
+<div class="contact-wrapper">
 
-    <div class="contact-header">
-      <h1>Jesteśmy tutaj, aby pomóc Ci znaleźć idealny akcesori dla Twojego pupila</h1>
+  <div class="contact-info contact-section">
+    <h3 class="section-title">Skontaktuj się ze mną</h3>
+
+    <div class="contact-item">
+      <i class="fas fa-map-marker-alt"></i>
+      <span class="contact-label">Siedziba</span>
+      <p>Matki Bożej Fatimskiej 63/43, 33-100 Tarnów</p>
+
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Matki+Bożej+Fatimskiej+63/43,+33-100+Tarnów"
+         target="_blank" rel="noopener noreferrer" title="Pokaż trasę do Matki Bożej Fatimskiej 63/43, Tarnów"
+         class="map-link">
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center=Matki+Bożej+Fatimskiej+63/43,+33-100+Tarnów&zoom=15&size=300x200&markers=color:red%7CMatki+Bożej+Fatimskiej+63/43,+33-100+Tarnów&key=YOUR_GOOGLE_MAPS_API_KEY"
+             alt="Mapa - Trasa do Matki Bożej Fatimskiej 63/43, Tarnów" style="border-radius:12px; width:100%; max-width:300px;"/>
+      </a>
+
     </div>
 
-    <section class="contact-info-section">
-      <div class="contact-info-grid">
+    <div class="contact-item">
+      <i class="fas fa-phone"></i>
+      <span class="contact-label">Zadzwoń do nas</span>
+      <a href="tel:+48573847579" class="contact-link">+48 573 847 579</a>
+    </div>
 
-        <div class="contact-item">
-          <div class="contact-icon">
-            <span class="material-icons">phone</span>
-          </div>
-          <div class="contact-details">
-            <h3>Telefon</h3>
-            <p><strong>+48 785 640 173</strong><br>
-              Pon-Pt: 9:00 - 17:00</p>
-          </div>
-        </div>
+    <div class="contact-item">
+      <i class="fas fa-envelope"></i>
+      <span class="contact-label">E-mail</span>
+      <a href="mailto:kontakt.weronikawoloszyn@gmail.com" class="contact-link">kontakt.weronikawoloszyn&#64;gmail.com</a>
+    </div>
+  </div>
 
-        <div class="contact-item">
-          <div class="contact-icon">
-            <span class="material-icons">email</span>
-          </div>
-          <div class="contact-details">
-            <h3>Email</h3>
-            <p><strong>rydzanicz.mm&#64;gmail.com</strong><br>
-              Odpowiadamy w ciągu 24h
-          </div>
-        </div>
 
-        <div class="contact-item">
-          <div class="contact-icon">
-            <span class="material-icons">business</span>
-          </div>
-          <div class="contact-details">
-            <h3>Dane rejestrowe</h3>
-            <p><strong>NIP:</strong> 123-456-78-90<br>
-              <strong>REGON:</strong> 123456789<br>
-              <strong>KRS:</strong> 0000123456<br>
-              Sąd Rejonowy dla m.st. Warszawy</p>
-          </div>
-        </div>
 
+  <div class="contact-form contact-container">
+
+    <h3 class="section-title">Napisz do mnie</h3>
+
+    <form (ngSubmit)="onSubmit()" *ngIf="!submitted" novalidate>
+      <div class="form-group">
+        <label for="name">Imię i nazwisko</label>
+        <input id="name" type="text" [(ngModel)]="name" name="name" required autocomplete="name"/>
       </div>
-    </section>
+
+      <div class="form-group">
+        <label for="email">Adres e-mail</label>
+        <input id="email" type="email" [(ngModel)]="addressEmail" name="email" required autocomplete="email"/>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Wiadomość</label>
+        <textarea id="message" [(ngModel)]="message" name="message" rows="5" required></textarea>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="sending">
+        <span *ngIf="!sending">Wyślij</span>
+        <span *ngIf="sending"><i class="fas fa-spinner fa-spin"></i> Wysyłanie...</span>
+      </button>
+
+      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+      <div *ngIf="submitted" class="success-message">
+        <p>Dziękuję za kontakt! Odpowiem jak najszybciej.</p>
+      </div>
+
+    </form>
+
+    <div *ngIf="submitted" class="success-message">
+      <p>Dziękuję za kontakt! Odpowiem jak najszybciej.</p>
+    </div>
   </div>
 </div>
