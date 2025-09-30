@@ -1,7 +1,7 @@
 
 :root {
   --color-primary: #856D55;
-  --color-primary-dark: #24160E;
+  --color-primary-dark: #a59819;
   --color-primary-light: #B2A28E;
   --color-secondary: #5A3E28;
 
@@ -199,12 +199,18 @@ header {
 }
 
 .header__brand {
-  font-size: 1.8rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, #856D55, #5A3E28);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow:
+    2px 2px 4px rgba(90, 62, 40, 0.7),
+    0 0 10px rgba(133, 109, 85, 0.5);
+  letter-spacing: 1.5px;
+  transition: color 0.3s ease;
 }
 
 h2 {
