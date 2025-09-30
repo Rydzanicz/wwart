@@ -8,6 +8,7 @@ import {TermsComponent} from './terms/terms.component';
 import {ProductDetailsComponent} from './product-details/product-details.component';
 import {CartComponent} from './cart/cart.component';
 import {SummaryComponent} from './summary/summary.component';
+import {DeliveryComponent} from './delivery/delivery.component';
 
 export const routes: Routes = [
   {path: '', component: ShopComponent},
@@ -17,6 +18,7 @@ export const routes: Routes = [
   {path: 'terms', component: TermsComponent},
   {path: 'shop', component: ShopComponent},
   {path: 'cart', component: CartComponent},
+  {path: 'delivery', component: DeliveryComponent},
   {path: 'summary', component: SummaryComponent},
   {path: 'product/:id', component: ProductDetailsComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}

@@ -1,0 +1,140 @@
+<div class="contact-container">
+  <div class="contact-content">
+    <div class="contact-header">
+      <h1 class="contact-title">
+        <i class="material-icons contact-icon">local_shipping</i>
+        Dostawa
+      </h1>
+      <p class="contact-subtitle">Bezpieczna dostawa - wybierz najwygodniejszą opcję dla Ciebie</p>
+    </div>
+
+    <div class="contact-layout">
+      <div class="contact-info-section">
+        <h3 class="section-title">Opcje dostawy</h3>
+
+        <div class="contact-item" [class.selected]="selectedDeliveryMethod === 'paczkomat'"
+             (click)="selectDeliveryMethod('paczkomat')">
+          <div class="contact-item-icon">
+            <i class="material-icons">store_mall_directory</i>
+          </div>
+          <div class="contact-item-content">
+            <span class="contact-label">Paczkomat InPost</span>
+            <p class="contact-value">Odbierz paczkę w dogodnym czasie<br>z dowolnego paczkomatu InPost</p>
+
+            <div class="map-preview">
+              <i class="material-icons">schedule</i>
+              <span>Dostępny 24/7</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item" [class.selected]="selectedDeliveryMethod === 'kurier'"
+             (click)="selectDeliveryMethod('kurier')">
+          <div class="contact-item-icon">
+            <i class="material-icons">local_shipping</i>
+          </div>
+          <div class="contact-item-content">
+            <span class="contact-label">Kurier</span>
+            <p class="contact-value">Dostawa bezpośrednio pod wskazany adres<br>w wybranym terminie</p>
+
+            <div class="map-preview">
+              <i class="material-icons">home</i>
+              <span>Pod drzwi</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <i class="material-icons">security</i>
+          </div>
+          <div class="contact-item-content">
+            <span class="contact-label">Bezpieczeństwo</span>
+            <p class="contact-value">Wszystkie przesyłki są ubezpieczone<br>i dokładnie pakowane dla Twojego bezpieczeństwa</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-section">
+        <h3 class="section-title">Szczegóły dostawy</h3>
+
+        <div *ngIf="!showDetails" class="delivery-info">
+          <div class="info-card">
+            <i class="material-icons">info</i>
+            <h4>Wybierz metodę dostawy</h4>
+            <p>Kliknij na preferowaną opcję dostawy po lewej stronie, aby zobaczyć szczegóły i rozpocząć zakupy.</p>
+          </div>
+        </div>
+
+        <div *ngIf="showDetails && selectedDeliveryMethod === 'paczkomat'" class="delivery-details">
+          <div class="delivery-option-header">
+            <i class="material-icons">store_mall_directory</i>
+            <h4>Paczkomat InPost</h4>
+          </div>
+          <div class="delivery-features">
+            <div class="feature">
+              <i class="material-icons">check_circle</i>
+              <span>Bezpłatna dostawa od 100 zł</span>
+            </div>
+            <div class="feature">
+              <i class="material-icons">check_circle</i>
+              <span>Dostawa w 1-2 dni robocze</span>
+            </div>
+            <div class="feature">
+              <i class="material-icons">check_circle</i>
+              <span>Powiadomienie SMS o dostawie</span>
+            </div>
+            <div class="feature">
+              <i class="material-icons">check_circle</i>
+              <span>48h na odbiór paczki</span>
+            </div>
+          </div>
+          <p class="delivery-description">
+            <strong>Bezpieczna i wygodna dostawa!</strong> Paczkomaty InPost to najszybszy sposób na otrzymanie Twojej paczki.
+            Odbierz ją kiedy chcesz - paczkomaty działają 24/7! <strong>Zachęcamy do zakupu - gwarantujemy bezpieczną dostawę!</strong>
+          </p>
+
+          <button class="btn-submit" (click)="proceedToOrder()">
+            <i class="material-icons">shopping_cart</i>
+            Przejdź do zamówienia
+          </button>
+        </div>
+
+        <div *ngIf="showDetails && selectedDeliveryMethod === 'kurier'" class="delivery-details">
+          <div class="delivery-option-header">
+            <i class="material-icons">local_shipping</i>
+            <h4>Dostawa kurierem</h4>
+          </div>
+          <div class="delivery-features">
+            <div class="feature">
+              <i class="material-icons">check_circle</i>
+              <span>Dostawa pod wskazany adres</span>
+            </div>
+            <div class="feature">
+              <i class="material-icons">check_circle</i>
+              <span>Możliwość wyboru terminu</span>
+            </div>
+            <div class="feature">
+              <i class="material-icons">check_circle</i>
+              <span>Sprawdzenie zawartości przy odbiorze</span>
+            </div>
+            <div class="feature">
+              <i class="material-icons">check_circle</i>
+              <span>Profesjonalna obsługa kuriera</span>
+            </div>
+          </div>
+          <p class="delivery-description">
+            <strong>Komfort i bezpieczeństwo!</strong> Nasz kurier dostarczy paczkę bezpośrednio do Ciebie.
+            Możesz sprawdzić zawartość przed odbiorem i mieć pewność, że wszystko jest w porządku.
+            <strong>Zachęcamy do zakupu - zapewniamy najwyższą jakość obsługi!</strong>
+          </p>
+
+          <button class="btn-submit" (click)="proceedToOrder()">
+            <i class="material-icons">shopping_cart</i>
+            Przejdź do zamówienia
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
