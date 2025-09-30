@@ -1,73 +1,104 @@
-<div class="contact-wrapper">
-
-  <div class="contact-info contact-section">
-    <h3 class="section-title">Skontaktuj się ze mną</h3>
-
-    <div class="contact-item">
-      <i class="fas fa-map-marker-alt"></i>
-      <span class="contact-label">Siedziba</span>
-      <p>Matki Bożej Fatimskiej 63/43, 33-100 Tarnów</p>
-
-      <a href="https://www.google.com/maps/dir/?api=1&destination=Matki+Bożej+Fatimskiej+63/43,+33-100+Tarnów"
-         target="_blank" rel="noopener noreferrer" title="Pokaż trasę do Matki Bożej Fatimskiej 63/43, Tarnów"
-         class="map-link">
-        <img src="https://maps.googleapis.com/maps/api/staticmap?center=Matki+Bożej+Fatimskiej+63/43,+33-100+Tarnów&zoom=15&size=300x200&markers=color:red%7CMatki+Bożej+Fatimskiej+63/43,+33-100+Tarnów&key=YOUR_GOOGLE_MAPS_API_KEY"
-             alt="Mapa - Trasa do Matki Bożej Fatimskiej 63/43, Tarnów" style="border-radius:12px; width:100%; max-width:300px;"/>
-      </a>
-
+<div class="contact-container">
+  <div class="contact-content">
+    <div class="contact-header">
+      <h1 class="contact-title">
+        <i class="material-icons contact-icon">mail_outline</i>
+        Kontakt
+      </h1>
+      <p class="contact-subtitle">Skontaktuj się ze mną - chętnie odpowiem na wszystkie pytania</p>
     </div>
 
-    <div class="contact-item">
-      <i class="fas fa-phone"></i>
-      <span class="contact-label">Zadzwoń do nas</span>
-      <a href="tel:+48573847579" class="contact-link">+48 573 847 579</a>
-    </div>
+    <div class="contact-layout">
+      <div class="contact-info-section">
+        <h3 class="section-title">Skontaktuj się ze mną</h3>
 
-    <div class="contact-item">
-      <i class="fas fa-envelope"></i>
-      <span class="contact-label">E-mail</span>
-      <a href="mailto:kontakt.weronikawoloszyn@gmail.com" class="contact-link">kontakt.weronikawoloszyn&#64;gmail.com</a>
-    </div>
-  </div>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <i class="material-icons">location_on</i>
+          </div>
+          <div class="contact-item-content">
+            <span class="contact-label">Siedziba</span>
+            <p class="contact-value">Matki Bożej Fatimskiej 63/43<br>33-100 Tarnów</p>
 
+            <a href="https://www.google.com/maps/dir/?api=1&destination=Matki+Bożej+Fatimskiej+63/43,+33-100+Tarnów"
+               target="_blank" rel="noopener noreferrer"
+               class="map-link">
+              <div class="map-preview">
+                <i class="material-icons">directions</i>
+                <span>Pokaż trasę</span>
+              </div>
+            </a>
+          </div>
+        </div>
 
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <i class="material-icons">phone</i>
+          </div>
+          <div class="contact-item-content">
+            <span class="contact-label">Zadzwoń do nas</span>
+            <a href="tel:+48573847579" class="contact-link">+48 573 847 579</a>
+          </div>
+        </div>
 
-  <div class="contact-form contact-container">
-
-    <h3 class="section-title">Napisz do mnie</h3>
-
-    <form (ngSubmit)="onSubmit()" *ngIf="!submitted" novalidate>
-      <div class="form-group">
-        <label for="name">Imię i nazwisko</label>
-        <input id="name" type="text" [(ngModel)]="name" name="name" required autocomplete="name"/>
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <i class="material-icons">mail</i>
+          </div>
+          <div class="contact-item-content">
+            <span class="contact-label">E-mail</span>
+            <a href="mailto:kontakt.weronikawoloszyn@gmail.com" class="contact-link">
+              kontakt.weronikawoloszyn&#64;gmail.com
+            </a>
+          </div>
+        </div>
       </div>
 
-      <div class="form-group">
-        <label for="email">Adres e-mail</label>
-        <input id="email" type="email" [(ngModel)]="addressEmail" name="email" required autocomplete="email"/>
+      <div class="contact-form-section">
+        <h3 class="section-title">Napisz do mnie</h3>
+
+        <form (ngSubmit)="onSubmit()" *ngIf="!submitted" novalidate class="contact-form">
+          <div class="form-group">
+            <label for="name" class="form-label">Imię i nazwisko</label>
+            <input id="name" type="text" [(ngModel)]="name" name="name" required
+                   autocomplete="name" class="form-input"/>
+          </div>
+
+          <div class="form-group">
+            <label for="email" class="form-label">Adres e-mail</label>
+            <input id="email" type="email" [(ngModel)]="addressEmail" name="email" required
+                   autocomplete="email" class="form-input"/>
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="form-label">Wiadomość</label>
+            <textarea id="message" [(ngModel)]="message" name="message" rows="5" required
+                      class="form-textarea"></textarea>
+          </div>
+
+          <div *ngIf="errorMessage" class="error-message">
+            <i class="material-icons">error</i>
+            {{ errorMessage }}
+          </div>
+
+          <button type="submit" class="btn-submit" [disabled]="sending">
+            <span *ngIf="!sending">
+              <i class="material-icons">send</i>
+              Wyślij wiadomość
+            </span>
+            <span *ngIf="sending">
+              <i class="material-icons spinner">hourglass_empty</i>
+              Wysyłanie...
+            </span>
+          </button>
+        </form>
+
+        <div *ngIf="submitted" class="success-message">
+          <i class="material-icons">check_circle</i>
+          <h4>Dziękuję za kontakt!</h4>
+          <p>Odpowiem jak najszybciej.</p>
+        </div>
       </div>
-
-      <div class="form-group">
-        <label for="message">Wiadomość</label>
-        <textarea id="message" [(ngModel)]="message" name="message" rows="5" required></textarea>
-      </div>
-
-      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-
-      <button type="submit" class="btn btn-primary" [disabled]="sending">
-        <span *ngIf="!sending">Wyślij</span>
-        <span *ngIf="sending"><i class="fas fa-spinner fa-spin"></i> Wysyłanie...</span>
-      </button>
-
-      <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-      <div *ngIf="submitted" class="success-message">
-        <p>Dziękuję za kontakt! Odpowiem jak najszybciej.</p>
-      </div>
-
-    </form>
-
-    <div *ngIf="submitted" class="success-message">
-      <p>Dziękuję za kontakt! Odpowiem jak najszybciej.</p>
     </div>
   </div>
 </div>
