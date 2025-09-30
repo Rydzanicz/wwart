@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
+import {Component, Inject, OnInit, OnDestroy, PLATFORM_ID} from '@angular/core';
 import {ProductComponent} from '../product/product.component';
 import {Product} from '../models/product.interface';
 import {CommonModule, isPlatformBrowser} from '@angular/common';
@@ -19,42 +19,174 @@ export class ShopComponent implements OnInit {
   products: Product[] = [
     {
       id: 1,
-      name: 'Granaty rodolity',
-      description: 'Ekskluzywna adresówka z rodolitamim',
-      descriptionDetails: 'Adresówka wykonana z najwyższej jakości materiałów, tworzona ręcznie z niezwykłą precyzją' +
-        ' i artystycznym wyczuciem. Każdy egzemplarz powstaje w procesie rzemieślniczym, co sprawia, że jest unikalny i' +
-        ' jedyny w swoim rodzaju.',
+      name: 'Zegar z falami morskimi1',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
       price: 220,
       originalPrice: 380,
-      image: ['assets/grant.jpg'],
-      badge: 'Bestseller',
-      rating: 5,
-      ratingCount: 45,
+      image: ['assets/shop/zegar.jpg'],
       isInWishlist: false
     },
     {
       id: 2,
-      name: 'Rodolit + tanzanit',
-      description: 'Przepiękna adresówka z rodolitem w otoczeniu tanzanitami.',
-      descriptionDetails: 'Adresówka wykonana z najwyższej jakości rodolitem, tworzona ręcznie z dbałością o każdy szczegół.' +
-        ' Każda powstaje w procesie indywidualnego wykonania, co sprawia, że jest unikalna i pełna artystycznego wyrazu.',
+      name: 'Zegar z falami morskimi2',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
       price: 230,
-      image: ['assets/kosc.jpg'],
-      badge: 'Bestseller',
-      rating: 4,
-      ratingCount: 18,
+      image: ['assets/shop/zegar2.jpg'],
       isInWishlist: false
     },
     {
       id: 3,
-      name: 'Rubinowe serce',
-      description: 'Romantyczna obroża z rubinami w kształcie serca.',
-      descriptionDetails: 'Romantyczna adresówka z rubinami w kształcie serca. Każdy kamień został ręcznie dopasowany przez naszych mistrzów jubilerów.',
-      price: 199,
-      image: ['assets/Rubinowesserce.jpg'],
-      badge: 'Nowy',
-      rating: 4.5,
-      ratingCount: 9,
+      name: 'Zegar z falami morskimi3',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/zegar3.jpg'],
+      isInWishlist: false
+    }, {
+      id: 4,
+      name: 'Zegar z falami morskimi4',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/zegar4.jpg'],
+      isInWishlist: false
+    }, {
+      id: 5,
+      name: 'Zegar z falami morskimi5',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/zegar5.jpg'],
+      isInWishlist: false
+    }, {
+      id: 6,
+      name: 'Zegar z falami morskimi6',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/zegar6.jpg'],
+      isInWishlist: false
+    }, {
+      id: 7,
+      name: 'Zegar z falami morskimi7',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/zegar7.jpg'],
+      isInWishlist: false
+    }, {
+      id: 8,
+      name: 'Zegar z falami morskimi8',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/zegar8.jpg'],
+      isInWishlist: false
+    }, {
+      id: 9,
+      name: 'Zegar z falami morskimi9',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/zegar9.jpg'],
+      isInWishlist: false
+    }, {
+      id: 10,
+      name: 'Zegar z falami morskimi10',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/zegar10.jpg'],
+      isInWishlist: false
+    }, {
+      id: 11,
+      name: 'stolik1',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/stolik1.jpg'],
+      isInWishlist: false
+    }, {
+      id: 12,
+      name: 'stolik2',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/stolik2.jpg'],
+      isInWishlist: false
+    }, {
+      id: 13,
+      name: 'stolik3',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/stolik3.jpg'],
+      isInWishlist: false
+    }, {
+      id: 14,
+      name: 'stolik4',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/stolik4.jpg'],
+      isInWishlist: false
+    }, {
+      id: 15,
+      name: 'deska1',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/deska1.jpg'],
+      isInWishlist: false
+    }, {
+      id: 16,
+      name: 'deska2',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/deska2.jpg'],
+      isInWishlist: false
+    }, {
+      id: 17,
+      name: 'obraz1',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/obraz1.jpg'],
+      isInWishlist: false
+    }, {
+      id: 18,
+      name: 'obraz2',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/obraz2.jpg'],
+      isInWishlist: false
+    }, {
+      id: 19,
+      name: 'obraz3',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/obraz3.jpg'],
+      isInWishlist: false
+    }, {
+      id: 20,
+      name: 'obraz4',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/obraz4.jpg'],
+      isInWishlist: false
+    }, {
+      id: 21,
+      name: 'obraz5',
+      description: 'Ekskluzywna zegar z falami morskimi',
+      descriptionDetails: 'zegar z falami morskimi.',
+      price: 230,
+      image: ['assets/shop/obraz5.jpg'],
       isInWishlist: false
     }
   ];

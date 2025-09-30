@@ -19,7 +19,7 @@
       {{ product.category }}
     </div>
 
-    <h2 class="product-name">{{ product.name }}</h2>
+    <h1 class="product-name">{{ product.name }}</h1>
 
     <p class="product-description" *ngIf="product.description">
       {{ product.description }}
@@ -46,7 +46,7 @@
       </span>
     </div>
 
-    <button class="btn-wishlist" (click)="onToggleWishlist($event)">
+    <button *ngIf="showWishlistButton" class="btn-wishlist" (click)="onToggleWishlist($event)">
       <span class="material-icons">{{ product.isInWishlist ? 'favorite' : 'favorite_border' }}</span>
     </button>
   </div>

@@ -1,0 +1,68 @@
+<div class="shop-container">
+  <section class="left-promo-section fade-in-up">
+    <div class="left-promo-text">
+      <h1>Twój dom, moja pasja - unikatowe meble z żywicy epoksydowej</h1>
+      <p>
+        Witaj na stronie Weronika.artresin - specjalizuję się w tworzeniu unikatowych mebli z żywicy, aby dostarczyć
+        swoim klientom nie tylko funkcjonalne, ale również piękne i trwałe elementy wyposażenia wnętrz.
+        W mojej ofercie znajdziesz stoły & stoliki, zegary ścienne, obrazy czy sztukę użytkową między innymi tace &
+        podstawki.
+      </p>
+      <p>
+        Zapoznaj się z ofertą i wybierz idealny dla Ciebie produkt.
+      </p>
+    </div>
+    <div class="left-promo-image-container">
+      <img src="../../assets/home/wwhome.jpg" alt="Weronika Wołoszyn art" class="left-promo-image"/>
+    </div>
+  </section>
+
+  <section class="right-promo-section fade-in-up">
+    <div class="right-promo-image-container">
+      <img src="../../assets/home/wzegar.jpg" alt="Weronika z zegarem" class="right-promo-image"/>
+    </div>
+    <div class="right-promo-text">
+      <h1>Co mogę dla Ciebie stworzyć?</h1>
+      <p>
+        • 𝗗𝗲𝗸𝗼𝗿𝗮𝗰𝗷𝗲 ścienne, które staną się centralnym punktem Twojego wnętrza.
+      </p>
+      <p>
+        • Funkcjonalne elementy, takie jak 𝗯𝗹𝗮𝘁𝘆, 𝘀𝘁𝗼𝗹𝗶𝗸𝗶 𝗰𝘇𝘆 𝗮𝗸𝗰𝗲𝘀𝗼𝗿𝗶𝗮, które łączą sztukę z praktycznością.
+      </p>
+      <p>
+        • Funkcjonalne elementy, takie jak 𝗯𝗹𝗮𝘁𝘆, 𝘀𝘁𝗼𝗹𝗶𝗸𝗶 𝗰𝘇𝘆 𝗮𝗸𝗰𝗲𝘀𝗼𝗿𝗶𝗮, które łączą sztukę z praktycznością.
+      </p>
+      <p>
+        Razem możemy stworzyć coś, co stanie się trwałym 𝗲𝗹𝗲𝗺𝗲𝗻𝘁𝗲𝗺 𝗧𝘄𝗼𝗷𝗲𝗴𝗼 𝗱𝗼𝗺𝘂, podkreślając jego wyjątkowy charakter.
+      </p>
+    </div>
+  </section>
+
+  <section class="left-promo-section fade-in-up">
+    <div class="left-promo-text">
+      <h1>Tworzymy unikalne meble z żywicy!</h1>
+      <p>Każde zamówienie to inna historia, inne emocje i wizje, co sprawia, że żywica nigdy się nie nudzi a Wasze zamówienia są pełne kreatywności i kolorów!</p>
+      <p>Diamentowa adresówka nie tylko dodaje niepowtarzalnego blasku, ale również gwarantuje bezpieczeństwo oraz personalizację dzięki grawerowi z imieniem pupila oraz danymi właściciela umieszczonymi na dwóch stronach.</p>
+    </div>
+    <div class="left-promo-image-container">
+      <img [src]="images[currentImageIndex]" alt="Opinia o produkcie" class="left-promo-image fade" />
+    </div>
+  </section>
+
+
+  <div class="shop-content">
+    <div class="shop-header">
+      <h4 class="shop-title fade-in-up">Bestsellery sklepu</h4>
+      <p class="shop-subtitle fade-in-up">Odkryj ekskluzywną kolekcję naszego sklepu</p>
+    </div>
+
+    <div class="products-grid">
+      <app-product
+        *ngFor="let product of originalProductOrder; trackBy: trackByProductId"
+        [product]="product"
+        (click)="onProductClick()">
+      </app-product>
+    </div>
+
+  </div>
+</div>

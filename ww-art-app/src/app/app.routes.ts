@@ -9,9 +9,10 @@ import {ProductDetailsComponent} from './product-details/product-details.compone
 import {CartComponent} from './cart/cart.component';
 import {SummaryComponent} from './summary/summary.component';
 import {DeliveryComponent} from './delivery/delivery.component';
+import {HomeComponent} from './home/home.component';
 
 export const routes: Routes = [
-  {path: '', component: ShopComponent},
+  {path: '', component: HomeComponent},
   {path: 'about', component: AboutComponent},
   {path: 'contact', component: ContactComponent},
   {path: 'privacy', component: PrivacyComponent},

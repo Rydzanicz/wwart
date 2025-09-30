@@ -17,6 +17,7 @@ export class ProductComponent implements OnInit {
   @Output() quickView = new EventEmitter();
   @Output() toggleWishlist = new EventEmitter<Product>();
   @Output() wishlistChanged = new EventEmitter<void>();
+  @Input() showWishlistButton: boolean = false;
 
   isInWishlist = false;
   private isBrowser = false;
