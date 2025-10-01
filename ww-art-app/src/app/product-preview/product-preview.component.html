@@ -1,111 +1,67 @@
 <div class="product-preview-container">
+  <div class="order-card">
+    <h3>Zamów produkt</h3>
 
-  <div class="shape-selection">
-    <h3>Wybierz kształt adresówki</h3>
-    <div class="shape-selector">
-      <button
-        *ngFor="let shape of availableShapes"
-        [class.active]="selectedShape === shape.id"
-        (click)="setSelectedShape(shape.id)"
-        class="shape-btn">
-        <img [src]="shape.image" [alt]="shape.name" class="shape-preview"/>
-        <span class="shape-name">{{ shape.name }}</span>
-      </button>
-    </div>
-  </div>
-
-  <div class="tag-preview-section">
-    <h3>Podgląd adresówki - {{ currentShapeName }}</h3>
-
-    <div class="side-toggle">
-      <button
-        [class.active]="showFront"
-        (click)="showFront = true"
-        class="toggle-btn">
-        Przód
-      </button>
-      <button
-        [class.active]="!showFront"
-        (click)="showFront = false"
-        class="toggle-btn">
-        Tył
-      </button>
-    </div>
-
-    <div class="tag-container-real" [class]="'shape-' + selectedShape">
-      <div class="tag-3d-real" [class.flipped]="!showFront">
-
-        <div class="tag-side-real tag-front-real">
-          <img [src]="currentTagImage" [alt]="currentShapeName" class="tag-image"/>
-          <div class="image-caption">Zdjęcie poglądowe</div>
-          <div class="text-overlay front-overlay">
-            <div class="engraved-text front-text">
-              {{ displayFrontText || 'Imię pupila' }}
-            </div>
-          </div>
-        </div>
-
-        <div class="tag-side-real tag-back-real">
-          <img [src]="currentTagImage" [alt]="currentShapeName" class="tag-image"/>
-          <div class="image-caption">Zdjęcie poglądowe</div>
-          <div class="text-overlay back-overlay">
-            <div class="engraved-text back-text">
-              <div class="text-line" *ngFor="let line of displayBackText.split('\n'); let i = index">
-                {{ line || (i === 0 ? 'Numer telefonu' : '') }}
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="option-group" *ngIf="availableShapes.length > 0">
+      <label>Kształt:</label>
+      <div class="shape-options">
+        <button *ngFor="let shape of availableShapes"
+                class="shape-btn"
+                [class.selected]="selectedShape === shape.id"
+                (click)="setSelectedShape(shape.id)">
+          <img [src]="shape.image" [alt]="shape.name" class="shape-preview">
+          <span class="shape-name">{{ shape.name }}</span>
+        </button>
       </div>
     </div>
 
-    <div class="current-side-info">
-      <span class="side-indicator">
-        {{ showFront ? 'Strona przednia' : 'Strona tylna' }}
-      </span>
-    </div>
-  </div>
-
-  <div class="personalization-panel">
-    <h3>Personalizacja</h3>
-
-    <div class="input-group">
-      <label for="frontText">
-        Tekst na przodzie (max {{ maxFrontChars }} znaków):
-      </label>
-      <input
-        id="frontText"
-        type="text"
-        [(ngModel)]="frontText"
-        [maxlength]="maxFrontChars"
-        [class.invalid]="!isFrontTextValid"
-        class="text-input"
-        placeholder="Imię pupila">
-      <div class="char-counter" [class.over-limit]="!isFrontTextValid">
-        {{ frontText.length }} / {{ maxFrontChars }}
+    <div class="option-group">
+      <label>Rozmiar:</label>
+      <div class="size-options">
+        <button *ngFor="let size of availableSizes"
+                class="size-btn"
+                [class.selected]="selectedSize === size"
+                (click)="selectedSize = size">
+          {{ size }}
+        </button>
       </div>
     </div>
 
-    <div class="input-group">
-      <label for="backText">
-        Tekst na tyle (max {{ maxBackChars }} znaków):
-      </label>
-      <textarea
-        id="backText"
-        [(ngModel)]="backText"
-        [maxlength]="maxBackChars"
-        [class.invalid]="!isBackTextValid"
-        class="text-input"
-        rows="3"
-        placeholder="Numer telefonu&#10;Adres e-mail"></textarea>
-      <div class="char-counter" [class.over-limit]="!isBackTextValid">
-        {{ backText.length }} / {{ maxBackChars }}
+    <div class="option-group">
+      <label>Kolor:</label>
+      <div class="color-options">
+        <button *ngFor="let color of availableColors"
+                class="color-btn"
+                [class.selected]="selectedColor === color"
+                (click)="selectedColor = color">
+          {{ color }}
+        </button>
       </div>
     </div>
 
-    <div class="live-preview-info">
-      <div class="info-icon">ℹ️</div>
-      <span>Tekst aktualizuje się w czasie rzeczywistym</span>
+    <div class="option-group">
+      <label>Ilość:</label>
+      <div class="quantity-controls">
+        <button class="qty-btn" (click)="decreaseQuantity()" [disabled]="quantity <= 1">-</button>
+        <span class="quantity-display">{{ quantity }}</span>
+        <button class="qty-btn" (click)="increaseQuantity()">+</button>
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button class="btn-add-to-cart" (click)="addToCart()">
+        <span class="material-icons">shopping_cart</span>
+        Dodaj do koszyka
+      </button>
+      <button class="btn-go-to-cart" (click)="goToCart()">
+        Zobacz koszyk
+      </button>
+    </div>
+
+    <div class="price-summary" *ngIf="product">
+      <div class="total-price">
+        Razem: {{ formatCurrency(getTotalPrice()) }} PLN
+      </div>
     </div>
   </div>
 </div>

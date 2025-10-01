@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-preview',
@@ -13,22 +14,19 @@ export class ProductPreviewComponent implements OnInit {
   @Input() product: any;
   @Input() availableShapes: { id: string, name: string, image: string }[] = [];
   @Output() selectedShapeChange = new EventEmitter<string>();
-  @Output() frontTextChange = new EventEmitter<string>();
-  @Output() backTextChange = new EventEmitter<string>();
 
-  frontText: string = '';
-  backText: string = '';
+  selectedShape: string = '';
+  selectedSize: string = 'M';
+  selectedColor: string = 'Naturalny';
+  quantity: number = 1;
 
-  showFront: boolean = true;
-  selectedShape: string = 'bone';
-  maxFrontChars: number = 10;
-  maxBackChars: number = 20;
+
+  availableSizes: string[] = ['S', 'M', 'L'];
+  availableColors: string[] = ['Naturalny', 'Złoty', 'Srebrny'];
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
-    if (this.product) {
-      this.frontText = 'Milka';
-      this.backText = '123 456 780';
-    }
     if (this.availableShapes.length > 0) {
       this.selectedShape = this.availableShapes[0].id;
       this.selectedShapeChange.emit(this.selectedShape);
@@ -40,37 +38,78 @@ export class ProductPreviewComponent implements OnInit {
     this.selectedShapeChange.emit(shapeId);
   }
 
-  onFrontTextChange(): void {
-    this.frontTextChange.emit(this.frontText);
+  increaseQuantity(): void {
+    this.quantity++;
   }
 
-  onBackTextChange(): void {
-    this.backTextChange.emit(this.backText);
+  decreaseQuantity(): void {
+    if (this.quantity > 1) {
+      this.quantity--;
+    }
   }
 
-  get isFrontTextValid(): boolean {
-    return this.frontText.length <= this.maxFrontChars;
+  getTotalPrice(): number {
+    return this.product?.price * this.quantity || 0;
   }
 
-  get isBackTextValid(): boolean {
-    return this.backText.length <= this.maxBackChars;
+  formatCurrency(price: number): string {
+    return new Intl.NumberFormat('pl-PL', {
+      style: 'currency',
+      currency: 'PLN',
+      currencyDisplay: 'symbol',
+    })
+      .format(price)
+      .replace(' zł', '');
   }
 
-  get displayFrontText(): string {
-    return this.frontText.substring(0, this.maxFrontChars);
+  addToCart(): void {
+    if (!this.product) {
+      console.error('Product not found. Unable to add to cart.');
+      return;
+    }
+
+    const cartItem = {
+      id: this.product.id,
+      name: this.product.name,
+      description: this.product.description,
+      price: this.product.price,
+      originalPrice: this.product.originalPrice,
+      quantity: this.quantity,
+      size: this.selectedSize,
+      color: this.selectedColor,
+      shape: this.selectedShape,
+      image: this.product.image[0],
+      category: this.product.category || 'Sztuka żywicowa',
+      badge: this.product.badge,
+      totalPrice: this.getTotalPrice()
+    };
+
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    const existingItemIndex = cart.findIndex((item: any) =>
+      item.id === this.product.id &&
+      item.size === this.selectedSize &&
+      item.color === this.selectedColor &&
+      item.shape === this.selectedShape
+    );
+
+    if (existingItemIndex > -1) {
+      cart[existingItemIndex].quantity += this.quantity;
+      cart[existingItemIndex].totalPrice = cart[existingItemIndex].quantity * this.product.price;
+    } else {
+      cart.push(cartItem);
+    }
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new CustomEvent('cartUpdated'));
+    }
+
+    alert(`Dodano ${this.quantity}x ${this.product.name} do koszyka!`);
   }
 
-  get displayBackText(): string {
-    return this.backText.substring(0, this.maxBackChars);
-  }
-
-  get currentTagImage(): string {
-    const shape = this.availableShapes.find(s => s.id === this.selectedShape);
-    return shape ? shape.image : (this.availableShapes.length ? this.availableShapes[0].image : '');
-  }
-
-  get currentShapeName(): string {
-    const shape = this.availableShapes.find(s => s.id === this.selectedShape);
-    return shape ? shape.name : (this.availableShapes.length ? this.availableShapes[0].name : '');
+  goToCart(): void {
+    this.router.navigate(['/cart']);
   }
 }

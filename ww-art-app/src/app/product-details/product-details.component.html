@@ -1,131 +1,124 @@
-<div class="product-details-container" *ngIf="product">
+<div class="product-details-container">
+  <div class="breadcrumb">
+    <a routerLink="/shop">Sklep</a> / {{ product.name }}
+  </div>
 
   <div class="product-details-layout">
+    <div class="product-description-section">
+      <div class="product-image-container">
+        <img [src]="product.image[0]" [alt]="product.name" class="product-main-image">
+        <div class="image-caption">Zdjęcie poglądowe</div>
+      </div>
 
-    <div class="product-preview-section">
-      <app-product-preview
-        [product]="product"
-        [availableShapes]="availableShapes"
-        (selectedShapeChange)="onShapeSelected($event)">
-      </app-product-preview>
-    </div>
-
-    <div class="product-info-section">
-
-      <div class="product-header">
-        <div class="breadcrumb">
-          <a routerLink="/shop">Sklep</a> / <span>{{ product.name }}</span>
+      <div class="product-info">
+        <div class="product-meta">
+          <span class="product-category" *ngIf="product.category">{{ product.category }}</span>
+          <span class="product-badge" *ngIf="product.badge">{{ product.badge }}</span>
         </div>
+
         <h1 class="product-title">{{ product.name }}</h1>
 
         <div class="product-rating" *ngIf="product.rating">
           <div class="rating-stars">
-        <span class="material-icons"
-              *ngFor="let star of getRatingStars(product.rating)"
-              [class.filled]="star.filled">
-          {{ star.filled ? 'star' : 'star_border' }}
-        </span>
+            <span class="material-icons"
+                  *ngFor="let star of getRatingStars(product.rating)"
+                  [class.filled]="star.filled">
+              {{ star.filled ? 'star' : 'star_border' }}
+            </span>
           </div>
-          <span class="rating-count" *ngIf="product.ratingCount">
-        ({{ product.ratingCount }} opinii)
-      </span>
+          <span class="rating-text">({{ product.ratingCount }} opinii)</span>
         </div>
-      </div>
 
-      <div class="pricing-section">
-        <div class="price-current">{{ formatCurrency(product.price) }} PLN</div>
-        <div class="price-original" *ngIf="product.originalPrice">
-          {{ formatCurrency(product.originalPrice) }} PLN
-        </div>
-        <div class="savings" *ngIf="calculateSavings() > 0">
-          Oszczędzasz {{ formatCurrency(calculateSavings()) }} PLN!
-        </div>
-      </div>
-
-      <div class="product-description">
-        <h3>Opis produktu</h3>
-        <p>{{ product.description }}</p>
-        <p class="details" *ngIf="product.descriptionDetails">{{ product.descriptionDetails }}</p>
-      </div>
-
-      <div class="product-options">
-
-        <div class="option-group">
-          <label>Rozmiar:</label>
-          <div class="size-options">
-            <button
-              *ngFor="let size of availableSizes"
-              [class.selected]="selectedSize === size"
-              (click)="selectedSize = size"
-              class="size-btn">
-              {{ size }}
-            </button>
+        <div class="pricing-section">
+          <div class="price-current">{{ formatCurrency(product.price) }} PLN</div>
+          <div class="price-original" *ngIf="product.originalPrice">
+            {{ formatCurrency(product.originalPrice) }} PLN
+          </div>
+          <div class="savings" *ngIf="calculateSavings() > 0">
+            Oszczędzasz {{ formatCurrency(calculateSavings()) }} PLN!
           </div>
         </div>
 
-        <div class="option-group">
-          <label>Kolor:</label>
-          <div class="color-options">
-            <button
-              *ngFor="let color of availableColors"
-              [class.selected]="selectedColor === color"
-              (click)="selectedColor = color"
-              class="color-btn">
-              {{ color }}
-            </button>
+        <div class="product-description">
+          <h3>Opis produktu</h3>
+          <p>{{ product.description }}</p>
+          <p class="details">{{ product.descriptionDetails }}</p>
+        </div>
+
+        <div class="resin-process-info">
+          <h3>Proces tworzenia z żywicy epoksydowej</h3>
+          <div class="process-steps">
+            <div class="process-step">
+              <span class="step-number">1</span>
+              <div class="step-content">
+                <h4>Przygotowanie</h4>
+                <p>Mieszanie żywicy epoksydowej z utwardzaczem oraz dodatkami kolorystycznymi</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <span class="step-number">2</span>
+              <div class="step-content">
+                <h4>Formowanie</h4>
+                <p>Wylewanie mieszanki do specjalnych form silikonowych</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <span class="step-number">3</span>
+              <div class="step-content">
+                <h4>Utwardzanie</h4>
+                <p>24-48 godzin procesu utwardzania w kontrolowanych warunkach</p>
+              </div>
+            </div>
+            <div class="process-step">
+              <span class="step-number">4</span>
+              <div class="step-content">
+                <h4>Wykańczanie</h4>
+                <p>Szlifowanie, polerowanie i montaż elementów jubilerskich</p>
+              </div>
+            </div>
           </div>
         </div>
 
-        <div class="option-group">
-          <label>Ilość:</label>
-          <div class="quantity-controls">
-            <button (click)="decreaseQuantity()" [disabled]="quantity <= 1" class="qty-btn">-</button>
-            <span class="quantity-display">{{ quantity }}</span>
-            <button (click)="increaseQuantity()" class="qty-btn">+</button>
+        <div class="product-specs">
+          <h3>Specyfikacja techniczna</h3>
+          <div class="specs-grid">
+            <div class="spec-item">
+              <span class="spec-label">Materiał:</span>
+              <span class="spec-value">Żywica epoksydowa wysokiej jakości</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Waga:</span>
+              <span class="spec-value">{{ product.weight }}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Wymiary:</span>
+              <span class="spec-value">{{ product.dimensions }}</span>
+            </div>
+            <div class="spec-item">
+              <span class="spec-label">Wykończenie:</span>
+              <span class="spec-value">Polerowane ręcznie</span>
+            </div>
           </div>
         </div>
 
-      </div>
-
-      <div class="action-buttons">
-        <button (click)="addToCart()" class="btn-add-to-cart">
-          <span class="icon">🛒</span>
-          Dodaj do koszyka - {{ formatCurrency(product.price * quantity) }} PLN
-        </button>
-        <button (click)="goToCart()" class="btn-go-to-cart">
-          Przejdź do koszyka
-        </button>
-      </div>
-
-      <div class="product-specs">
-        <h3>Specyfikacja techniczna</h3>
-        <div class="specs-grid">
-          <div class="spec-item">
-            <span class="spec-label">Waga:</span>
-            <span class="spec-value">{{ product.weight }}</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Wymiary:</span>
-            <span class="spec-value">{{ product.dimensions }}</span>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">Grawerowanie:</span>
-            <span class="spec-value">Tak, obie strony</span>
-          </div>
+        <div class="product-benefits">
+          <h3>Dlaczego warto wybrać ten produkt?</h3>
+          <ul>
+            <li>✨ Unikalne wzory z żywicy epoksydowej</li>
+            <li>🎨 Ręczne wykonanie przez doświadczonych artystów</li>
+            <li>💎 Wysokiej jakości materiały odporne na uszkodzenia</li>
+            <li>🛡️ Trwałość na lata użytkowania</li>
+            <li>📦 Eleganckie opakowanie prezentowe</li>
+            <li>🚚 Bezpieczna dostawa z ubezpieczeniem</li>
+          </ul>
         </div>
       </div>
+    </div>
 
-      <div class="product-benefits">
-        <h3>Dlaczego warto wybrać ten produkt?</h3>
-        <ul>
-          <li>✨ Prawdziwe diamenty najwyższej jakości</li>
-          <li>🔨 Ręczne wykonanie przez mistrzów jubilerów</li>
-          <li>💎 Personalizacja poprzez grawerowanie</li>
-          <li>🛡️ Trwałość na całe życie</li>
-          <li>📦 Eleganckie opakowanie prezentowe</li>
-          <li>🚚 Darmowa dostawa przy zamówieniach powyżej 200 PLN</li>
-        </ul>
-      </div>
+    <div class="product-order-section">
+      <app-product-preview
+        [product]="product">
+      </app-product-preview>
     </div>
   </div>
 </div>
