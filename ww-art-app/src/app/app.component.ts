@@ -4,6 +4,7 @@ import {HeaderComponent} from './header/header.component';
 import {FooterComponent} from './footer/footer.component';
 import {CookieComponent} from './cookie/cookie.component';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
+import {AiAssistantComponent} from './ai-assistant/ai-assistant.component';
 
 export interface Toast {
   id: number;
@@ -17,7 +18,7 @@ export interface Toast {
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent, CookieComponent],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, FooterComponent, CookieComponent, AiAssistantComponent],
   standalone: true
 })
 export class AppComponent implements OnInit {

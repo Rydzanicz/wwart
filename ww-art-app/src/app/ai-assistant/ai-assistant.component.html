@@ -1,0 +1,32 @@
+<div class="ai-assistant-wrapper">
+  <button class="ai-icon-btn" (click)="toggleChat()" aria-label="Toggle AI Assistant Chat">
+
+  <span *ngIf="!isOpen" class="material-icons">smart_toy</span>
+    <span *ngIf="isOpen" class="material-icons">close</span>
+  </button>
+
+  <div class="chat-window" *ngIf="isOpen" (mousedown)="$event.stopPropagation()">
+    <header class="chat-header">AI Asystent</header>
+    <section #chatHistory class="chat-history" [class.loading]="loading">
+      <div *ngFor="let msg of history" [ngClass]="{'user-msg': msg.role === 'user', 'bot-msg': msg.role === 'assistant'}" class="chat-message">
+        {{ msg.content }}
+      </div>
+    </section>
+    <form (submit)="ask()" class="chat-input-form" autocomplete="off">
+      <input
+        #chatInput
+        type="text"
+        [(ngModel)]="question"
+        name="question"
+        class="chat-input"
+        placeholder="Zadaj pytanie..."
+        [disabled]="loading"
+        required
+        autocomplete="off"
+      />
+      <button type="submit" class="chat-send-btn" [disabled]="loading" aria-label="Send">
+        <span class="material-icons">send</span>
+      </button>
+    </form>
+  </div>
+</div>
