@@ -201,30 +201,6 @@
   margin: var(--spacing-lg) 0;
 }
 
-.btn-add-to-cart {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
-  color: var(--color-white);
-  border: none;
-  padding: var(--spacing-md) var(--spacing-lg);
-  border-radius: var(--radius-md);
-  font-weight: 700;
-  cursor: pointer;
-  transition: all var(--transition-fast);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-xs);
-  font-size: 1rem;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  .material-icons {
-    font-size: 1.2rem;
-  }
-}
 
 .btn-go-to-cart {
   background: transparent;

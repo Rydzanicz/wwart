@@ -1,0 +1,90 @@
+<div class="ebook-container">
+  <div class="ebook-hero-section">
+    <div class="hero-content">
+      <h1 class="ebook-title">
+        <span class="material-icons ebook-icon">auto_stories</span>
+        Kompletny przewodnik tworzenia ozdób z żywicy epoksydowej
+      </h1>
+      <p class="ebook-subtitle">
+        Poznaj sekrety profesjonalnych artystów i naucz się tworzyć unikalne dzieła sztuki,
+        które sprzedają się za setki złotych!
+      </p>
+
+      <div class="ebook-preview">
+        <img src="assets/ebook/ebook.jpg" alt="Okładka ebooka" class="ebook-cover">
+        <div class="ebook-info">
+          <div class="ebook-stats">
+            <div class="stat-item">
+              <span class="material-icons">description</span>
+              <span>120+ stron</span>
+            </div>
+            <div class="stat-item">
+              <span class="material-icons">photo_library</span>
+              <span>50+ zdjęć</span>
+            </div>
+            <div class="stat-item">
+              <span class="material-icons">play_circle</span>
+              <span>15 video</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ebook-benefits-section">
+    <h2>Czego się nauczysz?</h2>
+    <div class="benefits-grid">
+      <div class="benefit-item">
+        <span class="material-icons">science</span>
+        <h3>Podstawy żywicy</h3>
+        <p>Poznaj właściwości różnych typów żywic i naucz się je właściwie mieszać</p>
+      </div>
+      <div class="benefit-item">
+        <span class="material-icons">palette</span>
+        <h3>Techniki kolorowania</h3>
+        <p>Opanuj zaawansowane metody tworzenia wzorów i efektów kolorystycznych</p>
+      </div>
+      <div class="benefit-item">
+        <span class="material-icons">handyman</span>
+        <h3>Profesjonalne wykończenie</h3>
+        <p>Naucz się szlifować i polerować swoje dzieła jak prawdziwy mistrz</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ebook-purchase-section">
+    <div class="purchase-card">
+      <h3>Rozpocznij swoją przygodę z żywicą już dziś!</h3>
+      <div class="price-section">
+        <span class="current-price">{{ formatCurrency(ebookPrice) }} PLN</span>
+        <span class="original-price">{{ formatCurrency(originalPrice) }} PLN</span>
+      </div>
+
+      <div class="quantity-section">
+        <label>Ilość:</label>
+        <div class="quantity-controls">
+          <button class="qty-btn" (click)="decreaseQuantity()" [disabled]="quantity <= 1">-</button>
+          <span class="quantity-display">{{ quantity }}</span>
+          <button class="qty-btn" (click)="increaseQuantity()">+</button>
+        </div>
+      </div>
+
+      <button class="btn-add-to-cart" (click)="addToCart()">
+        <span class="material-icons">shopping_cart</span>
+        Dodaj do koszyka - {{ formatCurrency(getTotalPrice()) }} PLN
+      </button>
+
+      <div class="purchase-guarantees">
+        <div class="guarantee-item">
+          <span class="material-icons">verified</span>
+          <span>30 dni gwarancji zwrotu</span>
+        </div>
+        <div class="guarantee-item">
+          <span class="material-icons">download</span>
+          <span>Natychmiastowy dostęp po zakupie</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

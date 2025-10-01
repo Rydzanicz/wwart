@@ -84,7 +84,10 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
       }, 3000);
     }
+  }
 
+  goToEbook() {
+    this.router.navigate(['/ebook']);
   }
 
   ngOnDestroy(): void {

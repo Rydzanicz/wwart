@@ -10,6 +10,7 @@ import {CartComponent} from './cart/cart.component';
 import {SummaryComponent} from './summary/summary.component';
 import {DeliveryComponent} from './delivery/delivery.component';
 import {HomeComponent} from './home/home.component';
+import {EbookComponent} from './ebook/ebook.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -20,6 +21,7 @@ export const routes: Routes = [
   {path: 'shop', component: ShopComponent},
   {path: 'cart', component: CartComponent},
   {path: 'delivery', component: DeliveryComponent},
+  {path: 'ebook', component: EbookComponent},
   {path: 'summary', component: SummaryComponent},
   {path: 'product/:id', component: ProductDetailsComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}

@@ -452,17 +452,28 @@ h2 {
 }
 
 .btn-add-to-cart {
-  flex: 1;
-  background: linear-gradient(135deg, var(--color-success), #20a040);
+  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
   color: var(--color-white);
   border: none;
-  padding: var(--spacing-sm) var(--spacing-lg);
+  padding: var(--spacing-md) var(--spacing-lg);
   border-radius: var(--radius-md);
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   transition: all var(--transition-fast);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  font-size: 1rem;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .material-icons {
+    font-size: 1.2rem;
+  }
 }
 
 .btn-add-to-cart:hover {
@@ -470,9 +481,6 @@ h2 {
   box-shadow: var(--shadow-lg);
 }
 
-/* ===============================================
-   CART COMPONENT - MODERNIZED
-   =============================================== */
 
 .cart-container {
   max-width: 1200px;
