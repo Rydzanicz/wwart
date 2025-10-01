@@ -1,7 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
-import { environment } from '../../environments/environment';
 
 export interface ChatMessage {
   role: 'user' | 'assistant' | 'system';
@@ -12,8 +11,8 @@ export interface ChatMessage {
   providedIn: 'root',
 })
 export class PerplexityService {
-  private apiUrl = environment.apiUrl;
-  private apiKey = environment.apiKey;
+  private readonly apiUrl = 'https://api.perplexity.ai/chat/completions';
+  private apiKey = 'API'; // wstaw swój klucz API
 
   private http: HttpClient | undefined;
 

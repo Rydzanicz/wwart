@@ -1,6 +1,6 @@
-import { Component, ViewChild, ElementRef, HostListener, AfterViewInit } from '@angular/core';
+import {Component, ViewChild, ElementRef, HostListener, AfterViewInit} from '@angular/core';
 import {NgIf, NgFor, NgClass, CommonModule} from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule} from '@angular/forms';
 import {ChatMessage, PerplexityService} from '../services/PerplexityService';
 
 @Component({
@@ -8,7 +8,7 @@ import {ChatMessage, PerplexityService} from '../services/PerplexityService';
   standalone: true,
   templateUrl: './ai-assistant.component.html',
   styleUrls: ['./ai-assistant.component.scss'],
-  imports: [CommonModule,FormsModule, NgClass]
+  imports: [CommonModule, FormsModule, NgClass]
 })
 export class AiAssistantComponent implements AfterViewInit {
   question = '';
@@ -20,7 +20,8 @@ export class AiAssistantComponent implements AfterViewInit {
   @ViewChild('chatInput') chatInput!: ElementRef<HTMLInputElement>;
   @ViewChild('chatHistory') chatHistory!: ElementRef<HTMLDivElement>;
 
-  constructor(private perplexity: PerplexityService) {}
+  constructor(private perplexity: PerplexityService) {
+  }
 
   ngAfterViewInit() {
     this.focusInput();
@@ -36,16 +37,16 @@ export class AiAssistantComponent implements AfterViewInit {
 
   ask() {
     if (!this.question.trim() || this.loading) return;
-    this.history.push({ role: 'user', content: this.question });
+    this.history.push({role: 'user', content: this.question});
     this.loading = true;
     this.perplexity.askWithHistory(this.getFullHistory()).subscribe({
       next: (res: string) => {
-        this.history.push({ role: 'assistant', content: res });
+        this.history.push({role: 'assistant', content: res});
         this.loading = false;
         this.scrollToBottom();
       },
       error: () => {
-        this.history.push({ role: 'assistant', content: 'Błąd komunikacji z Perplexity' });
+        this.history.push({role: 'assistant', content: 'Błąd komunikacji z Perplexity'});
         this.loading = false;
         this.scrollToBottom();
       }
@@ -55,11 +56,24 @@ export class AiAssistantComponent implements AfterViewInit {
   }
 
   getFullHistory(): ChatMessage[] {
+    const siteContext = `
+  Jesteś asystentem sklepu Weronika Wołoszyn ART, który specjalizuje się w tworzeniu unikalnych mebli i dekoracji z żywicy epoksydowej.
+  Oferta obejmuje stoły, stoliki, zegary ścienne, obrazy, tace, podstawki i inne akcesoria użytkowe.
+  Wszystkie projekty są spersonalizowane, dopasowane do potrzeb klienta, pełne kreatywności i kolorów.
+  Sklep oferuje również projekty na zamówienie, zatapianie pamiątek i indywidualne wykonania.
+  Każde zamówienie to unikalne dzieło łączące funkcjonalność ze sztuką.
+  Kontakt: Matki Bożej Fatimskiej 63/43, 33-100 Tarnów, Polska.
+  `;
+
     return [
-      { role: 'system', content: 'Odpowiadaj krótko i rzeczowo.' },
+      {
+        role: 'system',
+        content: `Odpowiadaj krótko i rzeczowo na podstawie poniższego kontekstu sklepu:\n${siteContext}`
+      },
       ...this.history
     ];
   }
+
 
   resetChat() {
     this.history = [];

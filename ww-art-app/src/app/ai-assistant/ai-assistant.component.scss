@@ -7,16 +7,17 @@
 
 .ai-assistant-wrapper {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 320px;
+  bottom: 10px;
+  right: 100px;
+  width: auto;
   z-index: 2000;
   font-family: 'Inter', sans-serif;
   display: flex;
-  flex-direction: column;
+  flex-direction: row-reverse;
   gap: 8px;
   cursor: default;
   user-select: none;
+  align-items: flex-end;
 }
 
 
