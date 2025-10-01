@@ -1,6 +1,5 @@
 <div *ngIf="isBrowser" class="inpost-widget-container">
 
-  <!-- Wybrany paczkomat -->
   <div *ngIf="selectedPoint && !showMap" class="selected-locker">
     <h4>Wybrany paczkomat:</h4>
     <div class="locker-info">
@@ -13,14 +12,12 @@
     </button>
   </div>
 
-  <!-- Przycisk wyboru paczkomatu -->
   <div *ngIf="!selectedPoint && !showMap" class="choose-locker">
     <button type="button" class="btn-submit" (click)="openMap()">
       📍 Wybierz paczkomat InPost
     </button>
   </div>
 
-  <!-- Mapa z widgetem -->
   <div *ngIf="showMap" class="inpost-map-container">
     <div class="map-header">
       <h4>Wybierz paczkomat InPost</h4>

@@ -4,10 +4,10 @@
     <div class="breadcrumb">
       <a routerLink="/shop">Sklep</a> / <span>Koszyk</span>
     </div>
-    <h1 class="cart-title">
+    <h3 >
       <span class="cart-icon">🛒</span>
       Twój koszyk
-    </h1>
+    </h3>
     <p class="cart-count" *ngIf="cartItems.length > 0">
       {{ cartItems.length }} {{ cartItems.length === 1 ? 'produkt' : 'produktów' }} w koszyku
     </p>
@@ -169,7 +169,7 @@
 
   <div class="empty-cart" *ngIf="cartItems.length === 0">
     <div class="empty-cart-icon">🛒</div>
-    <h2>Twój koszyk jest pusty</h2>
+    <h4>Twój koszyk jest pusty</h4>
     <p>Dodaj produkty do koszyka, aby kontynuować zakupy</p>
     <button routerLink="/shop" class="shop-btn">
       <span class="shop-icon">🏪</span>
