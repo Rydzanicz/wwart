@@ -10,6 +10,7 @@ import {AboutComponent} from './about/about.component';
 import {AppRoutingModule} from './app.routes';
 import {ShopComponent} from './shop/shop.component';
 import {HttpClientModule} from '@angular/common/http';
+import { InpostGeowidgetAngularModule } from 'inpost-geowidget-angular';
 
 @NgModule({
   declarations: [],
@@ -21,6 +22,7 @@ import {HttpClientModule} from '@angular/common/http';
     ContactComponent,
     AppComponent,
     FooterComponent,
+    InpostGeowidgetAngularModule,
     TermsComponent,
     HttpClientModule,
     ShopComponent

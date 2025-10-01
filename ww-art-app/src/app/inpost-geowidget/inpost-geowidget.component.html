@@ -19,19 +19,12 @@
   </div>
 
   <div *ngIf="showMap" class="inpost-map-container">
-    <div class="map-header">
-      <h4>Wybierz paczkomat InPost</h4>
-      <button type="button" class="btn-close-map" (click)="closeMap()">✕</button>
-    </div>
 
-    <inpost-geowidget
-      id="geowidget"
-      #geowidget
-      [attr.token]="token"
-      onpoint="onpointselect"
-      language="pl"
-      config="parcelcollect"
-      style="height: 400px; width: 100%; display: block;">
-    </inpost-geowidget>
-  </div>
+    <lib-inpost-geowidget-angular
+      [token]="token"
+      [id]="identifier"
+      [language]="language"
+      (pointSelect)="pointSelect($event)"
+      (apiReady)="apiReady($event)">
+    </lib-inpost-geowidget-angular>  </div>
 </div>
