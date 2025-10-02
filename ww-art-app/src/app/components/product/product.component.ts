@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Inject, Input, OnInit, Output, PLATFORM_ID} from '@angular/core';
 import {CommonModule, isPlatformBrowser} from '@angular/common';
-import {Product} from '../models/product.interface';
-import {LocalStorageService} from '../services/LocalStorageService';
-import {WishlistService} from '../services/WishlistService';
+import {Product} from '../../models/product.interface';
+import {LocalStorageService} from '../../services/LocalStorageService';
+import {WishlistService} from '../../services/WishlistService';
 
 @Component({
   selector: 'app-product',

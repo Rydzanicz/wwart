@@ -2,8 +2,8 @@ import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {CommonModule, isPlatformBrowser} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Router, RouterModule} from '@angular/router';
-import {CartItem} from '../models/product.interface';
-import {LocalStorageService} from '../services/LocalStorageService';
+import {CartItem} from '../../models/product.interface';
+import {LocalStorageService} from '../../services/LocalStorageService';
 
 @Component({
   selector: 'app-cart',

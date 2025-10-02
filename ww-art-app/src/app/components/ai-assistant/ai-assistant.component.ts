@@ -1,7 +1,7 @@
-import {Component, ViewChild, ElementRef, HostListener, AfterViewInit} from '@angular/core';
-import {NgIf, NgFor, NgClass, CommonModule} from '@angular/common';
+import {Component, ViewChild, ElementRef, AfterViewInit} from '@angular/core';
+import {NgClass, CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {ChatMessage, PerplexityService} from '../services/PerplexityService';
+import {ChatMessage, PerplexityService} from '../../services/PerplexityService';
 
 @Component({
   selector: 'app-ai-assistant',

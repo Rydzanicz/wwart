@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {InvoiceMailerService} from '../services/invoice-mailer.service';
+import {InvoiceMailerService} from '../../services/invoice-mailer.service';
 
 @Component({
   selector: 'app-contact',

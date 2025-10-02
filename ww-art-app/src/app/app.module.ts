@@ -2,15 +2,15 @@ import {NgModule} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {bootstrapApplication, BrowserModule} from '@angular/platform-browser';
 import {AppComponent} from './app.component';
-import {ContactComponent} from './contact/contact.component';
-import {PrivacyComponent} from './privacy/privacy.component';
-import {TermsComponent} from './terms/terms.component';
-import {FooterComponent} from './footer/footer.component';
-import {AboutComponent} from './about/about.component';
+import {ContactComponent} from './components/contact/contact.component';
+import {PrivacyComponent} from './components/privacy/privacy.component';
+import {TermsComponent} from './components/terms/terms.component';
+import {FooterComponent} from './components/footer/footer.component';
 import {AppRoutingModule} from './app.routes';
-import {ShopComponent} from './shop/shop.component';
+import {ShopComponent} from './components/shop/shop.component';
 import {HttpClientModule} from '@angular/common/http';
 import { InpostGeowidgetAngularModule } from 'inpost-geowidget-angular';
+import {AboutComponent} from './components/about/about.component';
 
 @NgModule({
   declarations: [],

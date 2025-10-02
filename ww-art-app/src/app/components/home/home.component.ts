@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit, OnDestroy, PLATFORM_ID} from '@angular/core';
 import {ProductComponent} from '../product/product.component';
-import {Product} from '../models/product.interface';
+import {Product} from '../../models/product.interface';
 import {CommonModule, isPlatformBrowser} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';

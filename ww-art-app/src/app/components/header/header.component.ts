@@ -1,7 +1,7 @@
 import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
 import {CommonModule, isPlatformBrowser} from '@angular/common';
-import {LocalStorageService} from '../services/LocalStorageService';
+import {LocalStorageService} from '../../services/LocalStorageService';
 
 @Component({
   selector: 'app-header',

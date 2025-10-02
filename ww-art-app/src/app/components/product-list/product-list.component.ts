@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ProductComponent} from '../product/product.component';
 import {NgForOf} from '@angular/common';
-import {Product} from '../models/product.interface';
+import {Product} from '../../models/product.interface';
 
 @Component({
   selector: 'app-product-list',

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {HeaderComponent} from './header/header.component';
-import {FooterComponent} from './footer/footer.component';
-import {CookieComponent} from './cookie/cookie.component';
+import {HeaderComponent} from './components/header/header.component';
+import {FooterComponent} from './components/footer/footer.component';
+import {CookieComponent} from './components/cookie/cookie.component';
 import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
-import {AiAssistantComponent} from './ai-assistant/ai-assistant.component';
+import {AiAssistantComponent} from './components/ai-assistant/ai-assistant.component';
 
 export interface Toast {
   id: number;

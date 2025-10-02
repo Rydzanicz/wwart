@@ -1,16 +1,16 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {ShopComponent} from './shop/shop.component';
-import {AboutComponent} from './about/about.component';
-import {ContactComponent} from './contact/contact.component';
-import {PrivacyComponent} from './privacy/privacy.component';
-import {TermsComponent} from './terms/terms.component';
-import {ProductDetailsComponent} from './product-details/product-details.component';
-import {CartComponent} from './cart/cart.component';
-import {SummaryComponent} from './summary/summary.component';
-import {DeliveryComponent} from './delivery/delivery.component';
-import {HomeComponent} from './home/home.component';
-import {EbookComponent} from './ebook/ebook.component';
+import {ShopComponent} from './components/shop/shop.component';
+import {ContactComponent} from './components/contact/contact.component';
+import {PrivacyComponent} from './components/privacy/privacy.component';
+import {TermsComponent} from './components/terms/terms.component';
+import {ProductDetailsComponent} from './components/product-details/product-details.component';
+import {CartComponent} from './components/cart/cart.component';
+import {SummaryComponent} from './components/summary/summary.component';
+import {DeliveryComponent} from './components/delivery/delivery.component';
+import {HomeComponent} from './components/home/home.component';
+import {EbookComponent} from './components/ebook/ebook.component';
+import {AboutComponent} from './components/about/about.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},

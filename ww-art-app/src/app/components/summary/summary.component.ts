@@ -2,8 +2,8 @@ import {Component, Inject, OnInit, PLATFORM_ID, ViewChild} from '@angular/core';
 import {CommonModule, isPlatformBrowser} from '@angular/common';
 import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {FormsModule, NgForm} from '@angular/forms';
-import {InvoiceMailerService} from '../services/invoice-mailer.service';
-import {CartItem} from '../models/product.interface';
+import {InvoiceMailerService} from '../../services/invoice-mailer.service';
+import {CartItem} from '../../models/product.interface';
 import {InpostGeowidgetComponent} from '../inpost-geowidget/inpost-geowidget.component';
 
 @Component({
