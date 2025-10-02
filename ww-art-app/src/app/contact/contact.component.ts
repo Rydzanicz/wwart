@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {ContactMailerService} from '../services/ContactMailerService';
+import {InvoiceMailerService} from '../services/invoice-mailer.service';
 
 @Component({
   selector: 'app-contact',
@@ -18,7 +18,7 @@ export class ContactComponent {
   errorMessage = '';
   sending = false;
 
-  constructor(private mailer: ContactMailerService) {
+  constructor(private mailer: InvoiceMailerService) {
   }
 
   onSubmit(): void {

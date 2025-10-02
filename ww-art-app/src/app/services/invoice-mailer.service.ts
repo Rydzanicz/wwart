@@ -31,4 +31,16 @@ export class InvoiceMailerService {
       responseType: 'text' as 'json'
     });
   }
+
+  sendContactMessage(contactData: { name: string; addressEmail: string; message: string }): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'X-API-KEY': this.apiKey
+    });
+
+    return this.getHttp().post(`${this.apiUrl}/mail`, contactData, {
+      headers,
+      responseType: 'text' as 'json'
+    });
+  }
 }
