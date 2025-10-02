@@ -25,20 +25,9 @@
           <div class="item-details">
             <h4 class="item-name">{{ item.name }}</h4>
 
-            <div class="item-options" *ngIf="item.size || item.color || item.tagShape">
+            <div class="item-options" *ngIf="item.size || item.color ">
               <span class="option" *ngIf="item.size">{{ item.size }}</span>
               <span class="option" *ngIf="item.color">{{ item.color }}</span>
-              <span class="option" *ngIf="item.tagShape">{{ item.tagShape }}</span>
-            </div>
-
-            <div class="personalization" *ngIf="item.frontText || item.backText">
-              <div class="pers-title">✨ Grawerowanie:</div>
-              <div class="pers-item" *ngIf="item.frontText">
-                Przód: <strong>"{{ item.frontText }}"</strong>
-              </div>
-              <div class="pers-item" *ngIf="item.backText">
-                Tył: <strong>"{{ item.backText }}"</strong>
-              </div>
             </div>
           </div>
 

@@ -42,28 +42,6 @@
               <span class="option-label">Kolor:</span>
               <span class="option-value">{{ item.color }}</span>
             </div>
-
-            <div class="option-tag" *ngIf="item.tagShape">
-              <span class="option-label">Kształt:</span>
-              <span class="option-value">{{ item.tagShape }}</span>
-            </div>
-          </div>
-
-          <div class="personalization-info" *ngIf="item.frontText || item.backText">
-            <h4 class="personalization-title">
-              <span class="personalization-icon">✨</span>
-              Personalizacja
-            </h4>
-            <div class="personalization-details">
-              <div class="personalization-item" *ngIf="item.frontText">
-                <span class="pers-label">Przód:</span>
-                <span class="pers-value">"{{ item.frontText }}"</span>
-              </div>
-              <div class="personalization-item" *ngIf="item.backText">
-                <span class="pers-label">Tył:</span>
-                <span class="pers-value">"{{ item.backText }}"</span>
-              </div>
-            </div>
           </div>
         </div>
 

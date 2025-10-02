@@ -40,6 +40,7 @@ export class SummaryComponent implements OnInit {
   emailError: boolean = false;
 
   acceptTerms: boolean = false;
+  shouldSendPDF: boolean = false;
   testModeAccepted: boolean = false;
 
   deliveryMethod: 'inpost-locker' | 'home-delivery' = 'inpost-locker';
@@ -95,6 +96,8 @@ export class SummaryComponent implements OnInit {
         this.total = this.orderData.total || 0;
         this.note = this.orderData.orderNote || this.note;
         this.cartItemCount = this.cartItems.reduce((total, item) => total + item.quantity, 0);
+        this.checkIfPdfInCart();
+
       } else {
         this.loadCart();
       }
@@ -109,6 +112,7 @@ export class SummaryComponent implements OnInit {
       this.subtotal = this.getTotalPrice();
       this.shipping = this.subtotal >= 150 ? 0 : 15;
       this.total = this.subtotal + this.shipping - this.discount;
+      this.checkIfPdfInCart();
     }
   }
 
@@ -156,6 +160,7 @@ export class SummaryComponent implements OnInit {
       buyerNip: this.buyerNip,
       buyerPhone: this.buyerPhone,
       acceptedTerms: this.acceptTerms,
+      shouldSendPDF: this.shouldSendPDF,
 
       orderNote: this.note,
       orderDate: new Date().toISOString(),
@@ -183,22 +188,15 @@ export class SummaryComponent implements OnInit {
 
         size: item.size,
         color: item.color,
-        tagShape: item.tagShape,
-
-        frontText: item.frontText || '',
-        backText: item.backText || '',
-        hasPersonalization: !!(item.frontText || item.backText),
 
         image: item.image || '',
         badge: item.badge || '',
-        weight: '12g',
         dimensions: '35mm x 20mm'
       })),
 
       orderSummary: {
         totalItems: this.cartItemCount,
         uniqueProducts: this.cartItems.length,
-        hasPersonalizedItems: this.cartItems.some(item => item.frontText || item.backText),
         averageItemPrice: this.subtotal / this.cartItemCount,
         shippingMethod: this.shipping > 0 ? 'PAID' : 'FREE',
         paymentMethod: 'ONLINE'
@@ -266,9 +264,13 @@ export class SummaryComponent implements OnInit {
     }
   }
 
+  checkIfPdfInCart(): void {
+    this.shouldSendPDF = this.cartItems.some(item => item.category === 'Ebook edukacyjny');
+  }
+
   handleLockerSelected(locker: any) {
     this.selectedLocker = locker;
-    this.buyerAddress = `${locker.name}\n${locker.address.line1}\n${locker.address.line2 || ''}`;
+    this.buyerAddress = `${locker.name}    ${locker.address.line1}   ${locker.address.line2 || ''}`;
   }
 
   checkEmailValidation(emailValue: string): void {
