@@ -1,118 +1,165 @@
-<div class="comments-container">
-
+<div class="product-comments">
   <div class="comments-header">
-    <div class="section-title">
-      <span class="material-icons comments-icon">chat_bubble_outline</span>
-      <h3>Komentarze produktu</h3>
-    </div>
-    <div class="comments-count">
+    <span class="material-icons">chat_bubble_outline</span>
+    <h3>Komentarze produktu</h3>
+  </div>
+
+  <div class="comments-stats">
+    <div class="stats-item">
       <span class="material-icons">comment</span>
       {{ comments.length }} {{ comments.length === 1 ? 'komentarz' : 'komentarzy' }}
     </div>
   </div>
 
-  <div class="add-comment-section">
-    <div class="section-title">
+  <div class="comment-form">
+    <div class="form-header">
       <span class="material-icons">add_comment</span>
       <h4>Dodaj komentarz</h4>
     </div>
 
-    <form class="comment-form" (ngSubmit)="addComment()" #commentForm="ngForm">
+    <form (ngSubmit)="addComment()" #commentForm="ngForm">
       <div class="form-group">
-        <label class="form-label" for="authorName">Twoje imię *</label>
-        <input
-          type="text"
-          id="authorName"
-          class="form-input"
-          [(ngModel)]="newComment.author"
-          name="authorName"
-          placeholder="Wpisz swoje imię"
-          required
-          maxlength="50"/>
+        <label for="authorName">Twoje imię *</label>
+        <input type="text"
+               id="authorName"
+               class="form-input"
+               [(ngModel)]="newComment.author"
+               name="authorName"
+               placeholder="Wpisz swoje imię"
+               required
+               maxlength="50"/>
       </div>
 
       <div class="form-group">
-        <label class="form-label">Ocena produktu</label>
+        <label>Ocena produktu</label>
         <div class="rating-input">
-   <span
-     *ngFor="let star of [1,2,3,4,5]; let i = index"
-     class="material-icons rating-star"
-     [class.active]="newComment.rating >= star"
-     (click)="setRating(star)">
-  {{ newComment.rating >= star ? 'star' : 'star_border' }}
-</span>
-
-          <span class="rating-text" *ngIf="newComment.rating > 0">
-        ({{ newComment.rating }}/5)
-      </span>
+          <span *ngFor="let star of [1,2,3,4,5]; let i = index"
+                class="material-icons rating-star"
+                [class.active]="newComment.rating >= star"
+                (click)="setRating(star)">
+            {{ newComment.rating >= star ? 'star' : 'star_border' }}
+          </span>
+          <span *ngIf="newComment.rating > 0" class="rating-text">
+            ({{ newComment.rating }}/5)
+          </span>
         </div>
       </div>
 
       <div class="form-group">
-        <label class="form-label" for="commentText">Twój komentarz *</label>
-        <textarea
-          id="commentText"
-          class="form-textarea"
-          [(ngModel)]="newComment.text"
-          name="commentText"
-          placeholder="Podziel się swoją opinią o produkcie..."
-          required
-          minlength="10"
-          maxlength="500"
-          rows="4"></textarea>
-        <div class="character-count">
+        <label for="commentText">Twój komentarz *</label>
+        <textarea id="commentText"
+                  class="form-textarea"
+                  [(ngModel)]="newComment.text"
+                  name="commentText"
+                  placeholder="Podziel się swoją opinią o produkcie..."
+                  required
+                  minlength="10"
+                  maxlength="500"
+                  rows="4">
+        </textarea>
+        <div class="char-counter">
           {{ newComment.text.length }}/500 znaków
         </div>
       </div>
 
-      <button
-        type="submit"
-        class="btn-submit"
-        [disabled]="!commentForm.valid || newComment.rating <= 0 || isSubmitting">
-        <span class="material-icons" *ngIf="!isSubmitting">send</span>
-        <span class="material-icons spinner" *ngIf="isSubmitting">sync</span>
-        {{ isSubmitting ? 'Wysyłanie...' : 'Dodaj komentarz' }}
-      </button>
-    </form>
+      <!-- Nowa sekcja upload zdjęcia -->
+      <div class="form-group">
+        <label for="imageInput">Zdjęcie (opcjonalnie)</label>
+        <div class="image-upload-area">
+          <input type="file"
+                 id="imageInput"
+                 class="file-input"
+                 accept="image/jpeg,image/jpg,image/png,image/gif"
+                 (change)="onFileSelected($event)"/>
 
-  </div>
-
-  <div *ngIf="isLoading" class="loading-placeholder">
-    Ładowanie komentarzy...
-  </div>
-
-  <div class="comments-list" *ngIf="!isLoading && comments.length > 0; else noCommentsTemplate">
-    <div class="comment-item" *ngFor="let comment of comments; trackBy: trackByCommentId">
-      <div class="comment-avatar">
-        <span class="material-icons">account_circle</span>
-      </div>
-      <div class="comment-content">
-        <div class="comment-header">
-          <span class="comment-author">{{ comment.author }}</span>
-          <span class="comment-date">{{ comment.createdAt | date: 'dd.MM.yyyy HH:mm' }}</span>
-        </div>
-        <div class="comment-rating" *ngIf="comment.rating">
-          <div class="rating-stars">
-            <span
-              *ngFor="let star of getRatingStars(comment.rating)"
-              class="material-icons"
-              [class.filled]="star.filled">
-              {{ star.filled ? 'star' : 'star_border' }}
-            </span>
+          <div class="file-upload-button" onclick="document.getElementById('imageInput').click()">
+            <span class="material-icons">add_photo_alternate</span>
+            <span>Dodaj zdjęcie</span>
           </div>
-          <span class="rating-value">({{ comment.rating }}/5)</span>
+
+          <!-- Podgląd wybranego zdjęcia -->
+          <div *ngIf="previewUrl" class="image-preview">
+            <img [src]="previewUrl" alt="Podgląd zdjęcia" class="preview-image">
+            <button type="button" class="remove-image-btn" (click)="clearFileSelection()">
+              <span class="material-icons">close</span>
+            </button>
+          </div>
+
+          <!-- Błędy walidacji pliku -->
+          <div *ngIf="fileError" class="file-error">
+            {{ fileError }}
+          </div>
         </div>
-        <p class="comment-text">{{ comment.text }}</p>
+        <div class="file-info">
+          Dozwolone formaty: JPEG, PNG, GIF. Maksymalny rozmiar: 5MB
+        </div>
       </div>
-    </div>
+
+      <div class="form-actions">
+        <button type="submit"
+                class="submit-btn"
+                [disabled]="!commentForm.form.valid || isSubmitting || newComment.rating === 0"
+                [class.loading]="isSubmitting">
+          <span *ngIf="!isSubmitting" class="material-icons">send</span>
+          <span *ngIf="isSubmitting" class="material-icons spinning">sync</span>
+          {{ isSubmitting ? 'Dodawanie...' : 'Dodaj komentarz' }}
+        </button>
+      </div>
+    </form>
   </div>
 
-  <ng-template #noCommentsTemplate>
-    <div class="no-comments">
-      <span class="material-icons no-comments-icon">chat_bubble_outline</span>
-      <h4>Brak komentarzy</h4>
-      <p>Bądź pierwszy i podziel się swoją opinią o tym produkcie!</p>
+  <div class="comments-list">
+    <div *ngIf="isLoading" class="loading">
+      Ładowanie komentarzy...
     </div>
-  </ng-template>
 
+    <div *ngIf="comments.length > 0; else noCommentsTemplate">
+      <!-- fragment wyświetlania komentarzy -->
+      <div *ngFor="let comment of comments; trackBy: trackByCommentId" class="comment-item">
+        <div class="comment-header">
+          <span class="material-icons user-icon">account_circle</span>
+          <div class="comment-meta">
+            <div class="author-name">{{ comment.author }}</div>
+            <div class="comment-date">{{ comment.createdAt | date: 'dd.MM.yyyy HH:mm' }}</div>
+          </div>
+          <div class="comment-rating" *ngIf="comment.rating">
+      <span *ngFor="let star of getRatingStars(comment.rating)" class="material-icons" [class.filled]="star.filled">
+        {{ star.filled ? 'star' : 'star_border' }}
+      </span>
+            <span class="rating-text">({{ comment.rating }}/5)</span>
+          </div>
+        </div>
+        <div class="comment-content">
+          <p class="comment-text">{{ comment.text }}</p>
+          <!-- Wyświetlanie zdjęcia jeśli istnieje -->
+          <div *ngIf="comment.photoPath" class="comment-image">
+            <img [src]="comment.photoPath"
+                 [alt]="'Zdjęcie od ' + comment.author"
+                 class="comment-img"
+                 (click)="openImageModal(comment.photoPath)"
+                 loading="lazy"/>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <ng-template #noCommentsTemplate>
+      <div class="no-comments">
+        <span class="material-icons">chat_bubble_outline</span>
+        <h4>Brak komentarzy</h4>
+        <p>Bądź pierwszy i podziel się swoją opinią o tym produkcie!</p>
+      </div>
+    </ng-template>
+  </div>
+</div>
+
+<!-- Modal do powiększenia zdjęcia -->
+<div *ngIf="selectedPhotoPath" class="image-modal" (click)="closeImageModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <img [src]="selectedPhotoPath" alt="Powiększone zdjęcie" class="modal-image">
+    <button class="close-modal-btn" (click)="closeImageModal()">
+      <span class="material-icons">close</span>
+    </button>
+  </div>
 </div>

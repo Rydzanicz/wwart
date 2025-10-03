@@ -1,7 +1,7 @@
 import {Injectable, Injector} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import { Comment } from '../models/comment.model';
+import {Comment} from '../models/comment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -44,27 +44,26 @@ export class InvoiceMailerService {
       responseType: 'text' as 'json'
     });
   }
+
+
   getCommentsByProductId(productId: string): Observable<Comment[]> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
       'X-API-KEY': this.apiKey
     });
 
     return this.getHttp().get<Comment[]>(`${this.apiUrl}/comments`, {
       headers,
-      params: { productId }
+      params: {productId}
     });
   }
 
-  addComment(comment: { productId: string; author: string; text: string; rating: number; createdDate: string }): Observable<Comment> {
+  addCommentWithImage(formData: FormData): Observable<Comment> {
     const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
       'X-API-KEY': this.apiKey
     });
 
-    return this.getHttp().post<Comment>(`${this.apiUrl}/comments`, comment, {
+    return this.getHttp().post<Comment>(`${this.apiUrl}/comments`, formData, {
       headers
     });
   }
-
 }

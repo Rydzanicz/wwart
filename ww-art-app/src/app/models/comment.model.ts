@@ -5,4 +5,5 @@ export interface Comment {
   text: string;
   rating?: number;
   createdAt: string;
+  photoPath?: string | null;
 }
