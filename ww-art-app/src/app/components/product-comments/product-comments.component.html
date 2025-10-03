@@ -1,1 +1,118 @@
-<p>product-comments works!</p>
+<div class="comments-container">
+
+  <div class="comments-header">
+    <div class="section-title">
+      <span class="material-icons comments-icon">chat_bubble_outline</span>
+      <h3>Komentarze produktu</h3>
+    </div>
+    <div class="comments-count">
+      <span class="material-icons">comment</span>
+      {{ comments.length }} {{ comments.length === 1 ? 'komentarz' : 'komentarzy' }}
+    </div>
+  </div>
+
+  <div class="add-comment-section">
+    <div class="section-title">
+      <span class="material-icons">add_comment</span>
+      <h4>Dodaj komentarz</h4>
+    </div>
+
+    <form class="comment-form" (ngSubmit)="addComment()" #commentForm="ngForm">
+      <div class="form-group">
+        <label class="form-label" for="authorName">Twoje imię *</label>
+        <input
+          type="text"
+          id="authorName"
+          class="form-input"
+          [(ngModel)]="newComment.author"
+          name="authorName"
+          placeholder="Wpisz swoje imię"
+          required
+          maxlength="50"/>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Ocena produktu</label>
+        <div class="rating-input">
+   <span
+     *ngFor="let star of [1,2,3,4,5]; let i = index"
+     class="material-icons rating-star"
+     [class.active]="newComment.rating >= star"
+     (click)="setRating(star)">
+  {{ newComment.rating >= star ? 'star' : 'star_border' }}
+</span>
+
+          <span class="rating-text" *ngIf="newComment.rating > 0">
+        ({{ newComment.rating }}/5)
+      </span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="commentText">Twój komentarz *</label>
+        <textarea
+          id="commentText"
+          class="form-textarea"
+          [(ngModel)]="newComment.text"
+          name="commentText"
+          placeholder="Podziel się swoją opinią o produkcie..."
+          required
+          minlength="10"
+          maxlength="500"
+          rows="4"></textarea>
+        <div class="character-count">
+          {{ newComment.text.length }}/500 znaków
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn-submit"
+        [disabled]="!commentForm.valid || newComment.rating <= 0 || isSubmitting">
+        <span class="material-icons" *ngIf="!isSubmitting">send</span>
+        <span class="material-icons spinner" *ngIf="isSubmitting">sync</span>
+        {{ isSubmitting ? 'Wysyłanie...' : 'Dodaj komentarz' }}
+      </button>
+    </form>
+
+  </div>
+
+  <div *ngIf="isLoading" class="loading-placeholder">
+    Ładowanie komentarzy...
+  </div>
+
+  <div class="comments-list" *ngIf="!isLoading && comments.length > 0; else noCommentsTemplate">
+    <div class="comment-item" *ngFor="let comment of comments; trackBy: trackByCommentId">
+      <div class="comment-avatar">
+        <span class="material-icons">account_circle</span>
+      </div>
+      <div class="comment-content">
+        <div class="comment-header">
+          <span class="comment-author">{{ comment.author }}</span>
+          <span class="comment-date">{{ comment.createdAt | date: 'dd.MM.yyyy HH:mm' }}</span>
+        </div>
+        <div class="comment-rating" *ngIf="comment.rating">
+          <div class="rating-stars">
+            <span
+              *ngFor="let star of getRatingStars(comment.rating)"
+              class="material-icons"
+              [class.filled]="star.filled">
+              {{ star.filled ? 'star' : 'star_border' }}
+            </span>
+          </div>
+          <span class="rating-value">({{ comment.rating }}/5)</span>
+        </div>
+        <p class="comment-text">{{ comment.text }}</p>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noCommentsTemplate>
+    <div class="no-comments">
+      <span class="material-icons no-comments-icon">chat_bubble_outline</span>
+      <h4>Brak komentarzy</h4>
+      <p>Bądź pierwszy i podziel się swoją opinią o tym produkcie!</p>
+    </div>
+  </ng-template>
+
+</div>

@@ -3,6 +3,7 @@ import { ActivatedRoute,  RouterLink } from '@angular/router';
 import { CommonModule } from "@angular/common";
 import { ProductPreviewComponent } from '../product-preview/product-preview.component';
 import { FormsModule } from '@angular/forms';
+import {ProductCommentsComponent} from '../product-comments/product-comments.component';
 
 @Component({
   selector: 'app-product-details',
@@ -12,7 +13,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     ProductPreviewComponent,
     FormsModule,
-    RouterLink
+    RouterLink,
+    ProductCommentsComponent
   ]
 })
 export class ProductDetailsComponent implements OnInit {
