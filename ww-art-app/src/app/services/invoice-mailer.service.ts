@@ -7,8 +7,8 @@ import {Comment} from '../models/comment.model';
   providedIn: 'root',
 })
 export class InvoiceMailerService {
-  private apiUrl = '';
-  private apiKey = '';
+  private apiUrl = 'https://wwartservice-77969478377.europe-central2.run.app';
+  private apiKey = 'VIGGO=4MB0ycv7IGfCs8NLB4Xl0rHLgeVCG_vDOGAZRyGHkzzjfX8pGvweLyB-a43yKF-UTKuXJNkQRMGzF7h8Q0BpdQ5j8kgEw6MYUArcvrkWq4s9_JVBBFwmBV513m3trTwlacTy93npp2CGoFpl-Ji4ExTPDgAmoLyTYeO65pyZuWzCqrU';
   private http: HttpClient | undefined;
 
   constructor(private injector: Injector) {

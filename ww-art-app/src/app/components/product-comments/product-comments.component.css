@@ -21,6 +21,34 @@
       color: #333;
     }
   }
+  .product-comments .comments-list .comment-item .comment-content .comment-image {
+    margin-top: 10px;
+    max-width: 100%;
+  }
+
+  .product-comments .comments-list .comment-item .comment-content .comment-image .comment-img {
+    display: block;
+    width: 100%;
+    max-width: 300px;      /* twardy limit szerokości */
+    max-height: 200px;     /* twardy limit wysokości */
+    height: auto;
+    object-fit: contain;   /* zachowaj proporcje, nie przycinaj */
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .product-comments .comments-list .comment-item .comment-content .comment-image .comment-img:hover {
+    transform: scale(1.02);
+  }
+
+  /* Mobile: mniejsza wysokość i pełna szerokość kontenera */
+  @media (max-width: 768px) {
+    .product-comments .comments-list .comment-item .comment-content .comment-image .comment-img {
+      max-width: 100%;
+      max-height: 150px;
+    }
+  }
 
   .comment-form {
     background: #f9f9f9;

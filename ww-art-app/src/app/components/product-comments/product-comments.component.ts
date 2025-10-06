@@ -52,7 +52,7 @@ export class ProductCommentsComponent implements OnInit {
           .map(c => ({
             ...c,
             createdAtDate: new Date(c.createdAt),
-            photoPath: c.photoPath ? `/uploads/${c.photoPath}` : null
+            photoPath: c.photoPath ? `${c.photoPath}` : null
           }))
           .sort((a, b) => b.createdAtDate.getTime() - a.createdAtDate.getTime());
         this.isLoading = false;
