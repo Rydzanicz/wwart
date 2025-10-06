@@ -80,26 +80,9 @@
 
       <form (ngSubmit)="saveBuyerInfo()" #buyerForm="ngForm">
 
-        <div class="form-group">
-          <label>Wybierz metodę dostawy *</label>
-          <div class="delivery-options">
-            <label class="delivery-option">
-              <input type="radio" name="deliveryMethod" [(ngModel)]="deliveryMethod"
-                     value="inpost-locker" (change)="onDeliveryMethodChange()" required/>
-              <span class="option-text">📦 Paczkomat InPost</span>
-            </label>
-            <label class="delivery-option">
-              <input type="radio" name="deliveryMethod" [(ngModel)]="deliveryMethod"
-                     value="home-delivery" (change)="onDeliveryMethodChange()" required/>
-              <span class="option-text">🏠 Dostawa do domu</span>
-            </label>
-          </div>
-        </div>
-        <div *ngIf="deliveryMethod === 'inpost-locker'">
-          <app-inpost-geowidget (pointSelected)="handleLockerSelected($event)"></app-inpost-geowidget>
-        </div>
 
-        <div class="form-group" *ngIf="deliveryMethod === 'home-delivery'">
+
+        <div class="form-group" >
           <label for="buyerAddress">Adres dostawy *</label>
           <textarea
             id="buyerAddress"

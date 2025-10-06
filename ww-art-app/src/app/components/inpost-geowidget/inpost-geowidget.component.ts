@@ -10,12 +10,11 @@ import {
     ViewChild
 } from '@angular/core';
 import {CommonModule, isPlatformBrowser} from '@angular/common';
-import {InpostGeowidgetAngularModule} from 'inpost-geowidget-angular';
 
 @Component({
     selector: 'app-inpost-geowidget',
     standalone: true,
-    imports: [CommonModule, InpostGeowidgetAngularModule],
+    imports: [CommonModule],
     templateUrl: './inpost-geowidget.component.html',
     styleUrls: ['./inpost-geowidget.component.scss'],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]

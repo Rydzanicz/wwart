@@ -4,7 +4,6 @@ import {ActivatedRoute, Router, RouterModule} from '@angular/router';
 import {FormsModule, NgForm} from '@angular/forms';
 import {InvoiceMailerService} from '../../services/invoice-mailer.service';
 import {CartItem} from '../../models/product.interface';
-import {InpostGeowidgetComponent} from '../inpost-geowidget/inpost-geowidget.component';
 
 @Component({
   selector: 'app-summary',
@@ -14,8 +13,8 @@ import {InpostGeowidgetComponent} from '../inpost-geowidget/inpost-geowidget.com
   imports: [
     FormsModule,
     CommonModule,
-    RouterModule,
-    InpostGeowidgetComponent
+    RouterModule
+
   ]
 })
 export class SummaryComponent implements OnInit {
